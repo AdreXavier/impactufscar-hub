@@ -1,15 +1,9 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
-    "type": "page"
-  },
-  "contact": {
-    "title": "Contact ↗",
-    "type": "page",
-    "href": "https://twitter.com/shuding_",
-    "newWindow": true
-  }
+  "index": "Início",
+  "seguranca-ia": "Segurança de IA",
+  "pesquisa-mercado": "Pesquisa e Mercado",
+  "metricas": "Métricas",
+  "academico": "Acadêmico",
+  "trainee": "Programa de Trainee 2026",
+  "feedback": "Feedback 📝"
 }
