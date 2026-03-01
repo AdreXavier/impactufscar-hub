@@ -2,12 +2,12 @@ import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
-  logo: <span>My Project</span>,
+  logo: <span>ImpactUFSCar</span>,
   project: {
-    link: 'https://github.com/shuding/nextra-docs-template',
+    link: 'https://github.com/AdreXavier/impactufscar-hub',
   },
   chat: {
-    link: 'https://discord.com',
+    link: 'impactufscar.dev',
   },
   docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
   footer: {
