@@ -7,7 +7,7 @@ const config: DocsThemeConfig = {
     link: 'https://github.com/AdreXavier/impactufscar-hub',
   },
   chat: {
-    link: 'impactufscar.dev',
+    link: 'https://impactufscar.dev',
   },
   docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
   footer: {
