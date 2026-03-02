@@ -7,62 +7,17 @@ import {
   TrendingUp,
   ShieldCheck,
 } from 'lucide-react'
-import { getSupabase } from '../lib/supabase'
+import { courses } from '../lib/courses'
+import { getAreaProgress } from './actions/lessons'
 
 export const dynamic = 'force-dynamic'
 
-const tracks = [
-  {
-    name: 'Trainee',
-    slug: 'trainee',
-    icon: GraduationCap,
-    modules: ['trainee'],
-  },
-  {
-    name: 'Acadêmico',
-    slug: 'academico',
-    icon: BookOpen,
-    modules: ['academico'],
-  },
-  {
-    name: 'Métricas',
-    slug: 'metricas',
-    icon: BarChart3,
-    modules: ['metricas'],
-  },
-  {
-    name: 'Pesquisa de Mercado',
-    slug: 'pesquisa-mercado',
-    icon: TrendingUp,
-    modules: ['pesquisa-mercado'],
-  },
-  {
-    name: 'Segurança de IA',
-    slug: 'seguranca-ia',
-    icon: ShieldCheck,
-    modules: ['seguranca-ia'],
-  },
-]
-
-async function getUserProgress(userId: string) {
-  const allModuleSlugs = tracks.flatMap((t) => t.modules)
-
-  const { data, error } = await getSupabase()
-    .from('progress')
-    .select('module_slug, completed')
-    .eq('user_id', userId)
-    .in('module_slug', allModuleSlugs)
-
-  if (error) {
-    console.error('Error fetching progress:', error)
-    return {}
-  }
-
-  const progressMap: Record<string, boolean> = {}
-  for (const row of data ?? []) {
-    progressMap[row.module_slug] = row.completed
-  }
-  return progressMap
+const areaIcons: Record<string, typeof GraduationCap> = {
+  trainee: GraduationCap,
+  academico: BookOpen,
+  metricas: BarChart3,
+  'pesquisa-mercado': TrendingUp,
+  'seguranca-ia': ShieldCheck,
 }
 
 function ProgressBar({ completed, total }: { completed: number; total: number }) {
@@ -77,7 +32,7 @@ function ProgressBar({ completed, total }: { completed: number; total: number })
       </div>
       <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
         <div
-          className="h-2 rounded-full bg-blue-600 transition-all"
+          className="h-2 rounded-full bg-green-600 transition-all"
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -90,7 +45,11 @@ export default async function DashboardPage() {
   const user = await currentUser()
 
   const firstName = user?.firstName ?? 'membro'
-  const progressMap = userId ? await getUserProgress(userId) : {}
+
+  const areaSlugs = Object.keys(courses)
+  const progressResults = userId
+    ? await Promise.all(areaSlugs.map((slug) => getAreaProgress(slug)))
+    : areaSlugs.map(() => ({ completed: 0, total: 0 }))
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-12">
@@ -98,31 +57,34 @@ export default async function DashboardPage() {
         Olá, {firstName}! 👋
       </h1>
       <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
-        Bem-vindo ao Hub do ImpactUFSCar. Acompanhe seu progresso nas trilhas abaixo.
+        Bem-vindo ao Hub do ImpactUFSCar. Acompanhe seu progresso nos cursos abaixo.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {tracks.map((track) => {
-          const completedCount = track.modules.filter(
-            (m) => progressMap[m]
-          ).length
-          const Icon = track.icon
+        {areaSlugs.map((slug, i) => {
+          const course = courses[slug]
+          const Icon = areaIcons[slug] ?? BookOpen
+          const { completed, total } = progressResults[i]
 
           return (
             <Link
-              key={track.slug}
-              href={`/${track.slug}`}
+              key={slug}
+              href={`/cursos/${slug}`}
               className="group rounded-xl border border-gray-200 p-6 transition-shadow hover:shadow-lg dark:border-gray-700"
             >
               <div className="flex items-center gap-3">
-                <Icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                <h2 className="text-lg font-semibold">{track.name}</h2>
+                <Icon className="h-6 w-6 text-green-600 dark:text-green-400" />
+                <h2 className="text-lg font-semibold">{course.title}</h2>
               </div>
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                {course.description}
+              </p>
 
-              <ProgressBar
-                completed={completedCount}
-                total={track.modules.length}
-              />
+              <ProgressBar completed={completed} total={total} />
+
+              <span className="mt-4 inline-block text-sm font-medium text-green-600 group-hover:underline dark:text-green-400">
+                Continuar →
+              </span>
             </Link>
           )
         })}
