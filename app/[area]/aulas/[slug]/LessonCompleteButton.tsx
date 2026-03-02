@@ -69,6 +69,7 @@ export default function LessonCompleteButton({
             <button
               disabled
               className="p-2 rounded-xl border border-[#3a0016] text-[#3a0016] cursor-not-allowed"
+              aria-label="Sem aula anterior"
             >
               <ArrowLeft size={20} />
             </button>

@@ -25,7 +25,7 @@ export interface Course {
 
 export const courses: Record<string, Course> = {
   trainee: {
-    title: 'Programa de Trainee 2026',
+    title: 'Programa de Trainee',
     description: 'Formação dos novos membros do ImpactUFSCar.',
     lessons: [
       {
