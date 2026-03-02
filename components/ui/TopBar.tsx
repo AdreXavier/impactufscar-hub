@@ -29,25 +29,25 @@ export default function TopBar() {
     <header
       style={{
         height: '56px',
-        borderBottom: '1px solid #7a1040',
+        borderBottom: '1px solid #3a0016',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 1.5rem',
-        backgroundColor: '#2a0d18',
+        backgroundColor: '#1a0009',
       }}
     >
       {/* Breadcrumb */}
       <nav style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem' }}>
         {crumbs.map((crumb, i) => (
           <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-            {i > 0 && <span style={{ color: 'var(--text-secondary)' }}>/</span>}
+            {i > 0 && <span style={{ color: '#7a4055' }}>&gt;</span>}
             {crumb.href ? (
-              <a href={crumb.href} style={{ color: 'var(--text-secondary)' }}>
+              <a href={crumb.href} style={{ color: '#7a4055', transition: 'color 0.15s' }}>
                 {crumb.label}
               </a>
             ) : (
-              <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
+              <span style={{ color: '#ffffff', fontWeight: 500 }}>
                 {crumb.label}
               </span>
             )}
@@ -61,7 +61,7 @@ export default function TopBar() {
           style={{
             background: 'none',
             border: 'none',
-            color: 'var(--text-secondary)',
+            color: '#7a4055',
             cursor: 'pointer',
             padding: '0.25rem',
           }}

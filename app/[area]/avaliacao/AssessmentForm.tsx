@@ -33,17 +33,17 @@ export default function AssessmentForm({ areaSlug, courseTitle, questions }: Ass
 
   if (submitted) {
     return (
-      <main className="mx-auto max-w-3xl px-6 py-12 text-center">
-        <div className="rounded-xl border border-green-200 bg-green-50 p-8 dark:border-green-800 dark:bg-green-950">
-          <h2 className="text-2xl font-bold text-green-700 dark:text-green-300">
+      <main className="mx-auto max-w-4xl px-8 py-8 text-center">
+        <div className="rounded-xl border border-[#50001F] bg-[#2a0d18] p-8">
+          <h2 className="text-2xl font-bold tracking-tight text-white">
             ✅ Resposta enviada!
           </h2>
-          <p className="mt-2 text-green-600 dark:text-green-400">
+          <p className="mt-2 text-[#d4a0b0]">
             A equipe irá revisar.
           </p>
           <Link
             href={`/${areaSlug}`}
-            className="mt-6 inline-block rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+            className="mt-6 inline-block bg-[#c4395a] hover:bg-[#d94d6b] text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-[#50001F]/50"
           >
             Voltar à área
           </Link>
@@ -53,25 +53,25 @@ export default function AssessmentForm({ areaSlug, courseTitle, questions }: Ass
   }
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
+    <main className="mx-auto max-w-4xl px-8 py-8">
       <Link
         href={`/${areaSlug}`}
-        className="text-sm text-green-600 hover:underline dark:text-green-400"
+        className="text-sm text-[#c4395a] hover:text-[#d94d6b] transition-colors"
       >
         ← Voltar à área
       </Link>
 
-      <h1 className="mt-4 text-3xl font-bold tracking-tight">
+      <h1 className="mt-4 text-3xl font-bold tracking-tight text-white">
         Avaliação — {courseTitle}
       </h1>
-      <p className="mt-2 text-gray-600 dark:text-gray-400">
+      <p className="mt-2 text-[#d4a0b0]">
         Responda às perguntas abaixo com suas próprias palavras.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-6">
         {questions.map((question, i) => (
           <div key={i}>
-            <label className="block text-sm font-medium mb-2">
+            <label className="block text-sm font-medium mb-2 text-white">
               {i + 1}. {question}
             </label>
             <textarea
@@ -83,7 +83,7 @@ export default function AssessmentForm({ areaSlug, courseTitle, questions }: Ass
                 next[i] = e.target.value
                 setAnswers(next)
               }}
-              className="w-full rounded-lg border border-gray-300 p-3 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full bg-[#2a0d18] border border-[#50001F] rounded-xl p-4 text-white placeholder-[#7a4055] focus:outline-none focus:ring-2 focus:ring-[#c4395a] resize-none min-h-[120px] transition-all"
               placeholder="Escreva sua resposta aqui..."
             />
           </div>
@@ -92,7 +92,7 @@ export default function AssessmentForm({ areaSlug, courseTitle, questions }: Ass
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-green-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-green-700 transition-colors disabled:opacity-50"
+          className="bg-[#c4395a] hover:bg-[#d94d6b] text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-[#50001F]/50 disabled:opacity-50"
         >
           {loading ? 'Enviando...' : 'Enviar avaliação'}
         </button>
