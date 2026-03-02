@@ -5,10 +5,10 @@
   --brand-primary-dark: #3a0016;
   --brand-primary-light: #7a1040;
   --brand-accent: #c4395a;
-  --bg-page: #1a0009;
-  --bg-card: #2a0d18;
-  --bg-card-hover: #3a1525;
-  --border: #50001F;
+  --bg-page: #0f0f1a;
+  --bg-card: #1a0009;
+  --bg-card-hover: #2a0d18;
+  --border: #3a0016;
   --text-primary: #ffffff;
   --text-secondary: #d4a0b0;
   --primary: #50001F;
@@ -34,3 +34,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #3a0016; border-radius: 10px; }

@@ -71,6 +71,32 @@ export async function getCompletedLessons(areaSlug: string): Promise<string[]> {
   return (data ?? []).map((row) => row.lesson_slug)
 }
 
+export async function getAllProgress() {
+  const { userId } = await auth()
+  if (!userId) return { completedLessons: 0, areasInProgress: 0, submittedAssessments: 0 }
+
+  const { data: lessonsData } = await getSupabase()
+    .from('lessons_progress')
+    .select('area_slug, lesson_slug')
+    .eq('user_id', userId)
+
+  const completedLessons = lessonsData?.length ?? 0
+
+  const uniqueAreas = new Set(lessonsData?.map((d) => d.area_slug) ?? [])
+  const areasInProgress = uniqueAreas.size
+
+  const { count } = await getSupabase()
+    .from('submissions')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', userId)
+
+  return {
+    completedLessons,
+    areasInProgress,
+    submittedAssessments: count ?? 0,
+  }
+}
+
 export async function submitAssessment(areaSlug: string, lessonSlug: string, answer: string) {
   const { userId } = await auth()
   if (!userId) throw new Error('Usuário deve estar autenticado.')

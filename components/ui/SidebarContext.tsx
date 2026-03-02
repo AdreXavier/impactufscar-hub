@@ -21,7 +21,7 @@ export function useSidebar() {
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
+    const check = () => setIsMobile(window.innerWidth < 1024)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
@@ -36,7 +36,7 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
 
   // Initialize once on mount
   useEffect(() => {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 1024) {
       setOpen(false)
     } else {
       const saved = localStorage.getItem('sidebar-open')

@@ -28,75 +28,33 @@ export default function TopBar() {
   }
 
   return (
-    <header
+    <header className="lg:hidden sticky top-0 z-40"
       style={{
-        height: '56px',
         borderBottom: '1px solid #3a0016',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 1rem',
-        backgroundColor: '#1a0009',
-        position: 'sticky',
-        top: 0,
-        zIndex: 30,
+        padding: '1rem',
+        backgroundColor: '#0f0f1a',
       }}
     >
-      {/* Left: hamburger + breadcrumb */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0, flex: 1 }}>
-        <button
-          onClick={toggle}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: '#d4a0b0',
-            cursor: 'pointer',
-            padding: '0.25rem',
-            flexShrink: 0,
-          }}
-          aria-label="Toggle menu"
-        >
-          <Menu size={22} />
-        </button>
-
-        {/* Breadcrumb - hidden on mobile, title shown instead */}
-        <nav className="hidden md:flex" style={{ alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem' }}>
-          {crumbs.map((crumb, i) => (
-            <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              {i > 0 && <span style={{ color: '#7a4055' }}>&gt;</span>}
-              {crumb.href ? (
-                <a href={crumb.href} style={{ color: '#7a4055', transition: 'color 0.15s' }}>
-                  {crumb.label}
-                </a>
-              ) : (
-                <span style={{ color: '#ffffff', fontWeight: 500 }}>
-                  {crumb.label}
-                </span>
-              )}
-            </span>
-          ))}
-        </nav>
-
-        {/* Mobile title */}
-        <span
-          className="md:hidden"
-          style={{
-            fontSize: '1rem',
-            fontWeight: 600,
-            color: '#ffffff',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          ImpactUFSCar
-        </span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div className="w-8 h-8 rounded-lg bg-[#50001F] flex items-center justify-center font-bold text-white">I</div>
+        <span className="text-lg font-bold text-white">Impact</span>
       </div>
-
-      {/* Right side */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexShrink: 0 }}>
-        <UserButton />
-      </div>
+      <button
+        onClick={toggle}
+        style={{
+          background: 'none',
+          border: 'none',
+          color: '#ffffff',
+          cursor: 'pointer',
+          padding: '0.5rem',
+        }}
+        aria-label="Toggle menu"
+      >
+        <Menu size={24} />
+      </button>
     </header>
   )
 }
