@@ -18,7 +18,12 @@ export default async function LessonPage({
   const lesson = course.lessons.find((l) => l.slug === slug)
   if (!lesson) notFound()
 
-  const completedSlugs = await getCompletedLessons(area)
+  let completedSlugs: string[] = []
+  try {
+    completedSlugs = await getCompletedLessons(area)
+  } catch (error) {
+    console.error('Failed to load completed lessons', error)
+  }
   const isCompleted = completedSlugs.includes(slug)
 
   const currentIndex = course.lessons.findIndex((l) => l.slug === slug)

@@ -39,7 +39,7 @@ export default function ProgressBar({
             height: '100%',
             width: `${pct}%`,
             borderRadius: '999px',
-            background: 'linear-gradient(90deg, var(--primary), var(--accent))',
+            background: 'linear-gradient(90deg, #c4395a, #ff6b8a)',
             transition: 'width 0.5s ease',
           }}
         />

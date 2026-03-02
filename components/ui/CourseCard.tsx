@@ -4,11 +4,11 @@ import ProgressBar from './ProgressBar'
 import Badge, { type BadgeVariant } from './Badge'
 
 const areaGradients: Record<string, string> = {
-  trainee: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-  academico: 'linear-gradient(135deg, #0056D2, #003DA5)',
-  metricas: 'linear-gradient(135deg, #f59e0b, #d97706)',
-  'pesquisa-mercado': 'linear-gradient(135deg, #10b981, #059669)',
-  'seguranca-ia': 'linear-gradient(135deg, #ef4444, #dc2626)',
+  trainee: 'linear-gradient(135deg, #50001F, #3a0016)',
+  academico: 'linear-gradient(135deg, #6b0028, #3a0016)',
+  metricas: 'linear-gradient(135deg, #7a1040, #50001F)',
+  'pesquisa-mercado': 'linear-gradient(135deg, #8b1545, #50001F)',
+  'seguranca-ia': 'linear-gradient(135deg, #3a0016, #1a0009)',
 }
 
 interface CourseCardProps {

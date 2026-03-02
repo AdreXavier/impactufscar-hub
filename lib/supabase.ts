@@ -7,9 +7,11 @@ export function getSupabase() {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL
     const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     if (!url || !key) {
-      throw new Error('Missing Supabase environment variables')
+      console.warn('Missing Supabase environment variables — using placeholder client')
+      _supabase = createClient('https://placeholder.supabase.co', 'placeholder')
+    } else {
+      _supabase = createClient(url, key)
     }
-    _supabase = createClient(url, key)
   }
   return _supabase
 }

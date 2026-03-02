@@ -21,15 +21,28 @@ const areaIcons: Record<string, typeof GraduationCap> = {
 }
 
 export default async function DashboardPage() {
-  const { userId } = await auth()
-  const user = await currentUser()
+  let firstName = 'membro'
+  let userId: string | null = null
 
-  const firstName = user?.firstName ?? 'membro'
+  try {
+    const authResult = await auth()
+    userId = authResult.userId
+    const user = await currentUser()
+    firstName = user?.firstName ?? 'membro'
+  } catch (error) {
+    console.error('Failed to load auth data', error)
+  }
 
   const areaSlugs = Object.keys(courses)
-  const progressResults = userId
-    ? await Promise.all(areaSlugs.map((slug) => getAreaProgress(slug)))
-    : areaSlugs.map(() => ({ completed: 0, total: 0 }))
+  let progressResults = areaSlugs.map(() => ({ completed: 0, total: 0 }))
+
+  if (userId) {
+    try {
+      progressResults = await Promise.all(areaSlugs.map((slug) => getAreaProgress(slug)))
+    } catch (error) {
+      console.error('Failed to load progress data', error)
+    }
+  }
 
   return (
     <main style={{ maxWidth: '960px', margin: '0 auto', padding: '3rem 1.5rem' }}>

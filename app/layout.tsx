@@ -5,11 +5,26 @@ import './globals.css'
 
 export const metadata = {
   title: 'ImpactUFSCar Hub',
+  icons: { icon: '/logo.png' },
+}
+
+function Shell({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <Sidebar />
+      <div style={{ marginLeft: '260px', minHeight: '100vh' }}>
+        <TopBar />
+        {children}
+      </div>
+    </>
+  )
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ?? 'pk_test_YWJjLWRlZi0xMi5jbGVyay5hY2NvdW50cy5kZXYk'}
+    >
       <html lang="pt" dir="ltr">
         <head>
           <link
@@ -18,11 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </head>
         <body>
-          <Sidebar />
-          <div style={{ marginLeft: '260px', minHeight: '100vh' }}>
-            <TopBar />
-            {children}
-          </div>
+          <Shell>{children}</Shell>
         </body>
       </html>
     </ClerkProvider>

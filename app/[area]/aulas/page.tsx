@@ -11,11 +11,20 @@ export default async function AulasPage({ params }: { params: Promise<{ area: st
   const course = courses[area]
   if (!course) notFound()
 
-  const { userId } = await auth()
-  const [progress, completedSlugs] = await Promise.all([
-    getAreaProgress(area),
-    getCompletedLessons(area),
-  ])
+  let progress = { completed: 0, total: 0 }
+  let completedSlugs: string[] = []
+
+  try {
+    const { userId } = await auth()
+    if (userId) {
+      ;[progress, completedSlugs] = await Promise.all([
+        getAreaProgress(area),
+        getCompletedLessons(area),
+      ])
+    }
+  } catch (error) {
+    console.error('Failed to load progress data', error)
+  }
 
   const completedSet = new Set(completedSlugs)
   const pct = progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0
