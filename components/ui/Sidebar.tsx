@@ -154,7 +154,7 @@ export default function Sidebar() {
           {user.imageUrl && (
             <img
               src={user.imageUrl}
-              alt={user.firstName ?? ''}
+              alt={user.firstName ? `${user.firstName}'s profile picture` : 'User avatar'}
               style={{
                 width: 32,
                 height: 32,

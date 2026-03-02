@@ -13,7 +13,7 @@ export async function getMDXContent(area: string, type: string, slug: string) {
 
   const source = fs.readFileSync(filePath, 'utf-8')
 
-  const { content, frontmatter } = await compileMDX<Record<string, string>>({
+  const { content, frontmatter } = await compileMDX<Record<string, unknown>>({
     source,
     options: { parseFrontmatter: true },
   })
