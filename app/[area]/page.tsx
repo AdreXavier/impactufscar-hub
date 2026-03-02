@@ -10,16 +10,16 @@ function ProgressBar({ completed, total }: { completed: number; total: number })
   const pct = total > 0 ? Math.round((completed / total) * 100) : 0
   return (
     <div className="mt-4">
-      <div className="flex justify-between text-sm mb-1">
+      <div className="flex justify-between text-sm mb-1 text-[#d4a0b0]">
         <span>
           {completed}/{total} aula{total !== 1 ? 's' : ''} concluída{total !== 1 ? 's' : ''}
         </span>
         <span>{pct}%</span>
       </div>
-      <div className="h-3 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+      <div className="h-3 w-full rounded-full bg-[#50001F]">
         <div
-          className="h-3 rounded-full bg-green-600 transition-all"
-          style={{ width: `${pct}%` }}
+          className="h-3 rounded-full transition-all"
+          style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #c4395a, #ff6b8a)' }}
         />
       </div>
     </div>
@@ -49,17 +49,17 @@ export default async function AreaOverviewPage({ params }: { params: Promise<{ a
   const completedSet = new Set(completedSlugs)
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
-      <Link href="/" className="text-sm text-green-600 hover:underline dark:text-green-400">
+    <main className="mx-auto max-w-4xl px-8 py-8">
+      <Link href="/" className="text-sm text-[#c4395a] hover:text-[#d94d6b] transition-colors">
         ← Voltar ao Dashboard
       </Link>
 
-      <h1 className="mt-4 text-3xl font-bold tracking-tight">{course.title}</h1>
-      <p className="mt-2 text-gray-600 dark:text-gray-400">{course.description}</p>
+      <h1 className="mt-4 text-3xl font-bold tracking-tight text-white">{course.title}</h1>
+      <p className="mt-2 text-[#d4a0b0]">{course.description}</p>
 
       <ProgressBar completed={progress.completed} total={progress.total} />
 
-      <h2 className="mt-8 text-xl font-semibold">📚 Aulas</h2>
+      <h2 className="mt-10 text-xs uppercase tracking-widest text-[#c4395a] font-semibold">📚 Aulas</h2>
       <div className="mt-4 space-y-3">
         {course.lessons.map((lesson, i) => {
           const done = completedSet.has(lesson.slug)
@@ -67,10 +67,10 @@ export default async function AreaOverviewPage({ params }: { params: Promise<{ a
             <Link
               key={lesson.slug}
               href={`/${area}/aulas/${lesson.slug}`}
-              className="flex items-center gap-3 rounded-lg border border-gray-200 p-4 transition-shadow hover:shadow-md dark:border-gray-700"
+              className="flex items-center gap-3 rounded-xl border border-[#50001F] bg-[#2a0d18] p-4 transition-all hover:bg-[#3a1525]"
             >
               <span className="text-xl">{done ? '✅' : '🔒'}</span>
-              <span className="font-medium">
+              <span className="font-medium text-white">
                 {i + 1}. {lesson.title}
               </span>
             </Link>
@@ -78,26 +78,26 @@ export default async function AreaOverviewPage({ params }: { params: Promise<{ a
         })}
       </div>
 
-      <h2 className="mt-8 text-xl font-semibold">📖 Leituras</h2>
+      <h2 className="mt-10 text-xs uppercase tracking-widest text-[#c4395a] font-semibold">📖 Leituras</h2>
       <div className="mt-4 space-y-3">
         {course.readings.map((reading, i) => (
           <Link
             key={reading.slug}
             href={`/${area}/leituras/${reading.slug}`}
-            className="flex items-center gap-3 rounded-lg border border-gray-200 p-4 transition-shadow hover:shadow-md dark:border-gray-700"
+            className="flex items-center gap-3 rounded-xl border border-[#50001F] bg-[#2a0d18] p-4 transition-all hover:bg-[#3a1525]"
           >
             <span className="text-xl">📄</span>
-            <span className="font-medium">
+            <span className="font-medium text-white">
               {i + 1}. {reading.title}
             </span>
           </Link>
         ))}
       </div>
 
-      <div className="mt-8">
+      <div className="mt-10">
         <Link
           href={`/${area}/avaliacao`}
-          className="inline-flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+          className="inline-flex items-center gap-2 bg-[#c4395a] hover:bg-[#d94d6b] text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-[#50001F]/50"
         >
           📝 Avaliação
         </Link>

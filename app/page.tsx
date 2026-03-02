@@ -45,11 +45,11 @@ export default async function DashboardPage() {
   }
 
   return (
-    <main style={{ maxWidth: '960px', margin: '0 auto', padding: '3rem 1.5rem' }}>
-      <h1 style={{ fontSize: '1.8rem', fontWeight: 700 }}>
+    <main style={{ maxWidth: '960px', margin: '0 auto', padding: '2rem' }}>
+      <h1 style={{ fontSize: '1.8rem', fontWeight: 700, letterSpacing: '-0.025em' }}>
         Olá, {firstName}! 👋
       </h1>
-      <p style={{ marginTop: '0.5rem', color: 'var(--text-secondary)' }}>
+      <p style={{ marginTop: '0.5rem', color: '#d4a0b0' }}>
         Bem-vindo ao Hub do ImpactUFSCar. Acompanhe seu progresso nos cursos abaixo.
       </p>
 

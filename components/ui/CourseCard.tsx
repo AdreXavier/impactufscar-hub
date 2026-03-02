@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import type { LucideIcon } from 'lucide-react'
 import ProgressBar from './ProgressBar'
@@ -65,7 +67,7 @@ export default function CourseCard({
         }}
       />
 
-      <div style={{ padding: '1.25rem' }}>
+      <div style={{ padding: '1.5rem' }}>
         <div
           style={{
             display: 'flex',
@@ -103,7 +105,7 @@ export default function CourseCard({
             style={{
               fontSize: '0.85rem',
               fontWeight: 600,
-              color: 'var(--primary)',
+              color: 'var(--accent)',
             }}
           >
             {cta} →

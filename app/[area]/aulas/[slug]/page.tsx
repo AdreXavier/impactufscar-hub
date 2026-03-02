@@ -30,21 +30,21 @@ export default async function LessonPage({
   const nextLesson = course.lessons[currentIndex + 1] ?? null
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
+    <main className="mx-auto max-w-4xl px-8 py-8">
       <Link
         href={`/${area}/aulas`}
-        className="text-sm text-green-600 hover:underline dark:text-green-400"
+        className="text-sm text-[#c4395a] hover:text-[#d94d6b] transition-colors"
       >
         ← Voltar às aulas
       </Link>
 
-      <h1 className="mt-4 text-3xl font-bold tracking-tight">{lesson.title}</h1>
+      <h1 className="mt-4 text-3xl font-bold tracking-tight text-white">{lesson.title}</h1>
 
-      <div className="mt-8 prose dark:prose-invert max-w-none">
-        <p className="text-gray-600 dark:text-gray-400">
-          Conteúdo da aula: <strong>{lesson.title}</strong>
+      <div className="mt-8 max-w-none">
+        <p className="text-[#d4a0b0]">
+          Conteúdo da aula: <strong className="text-white">{lesson.title}</strong>
         </p>
-        <p className="text-gray-500 dark:text-gray-500 text-sm italic">
+        <p className="text-[#7a4055] text-sm italic mt-2">
           O conteúdo detalhado desta aula será adicionado em breve.
         </p>
       </div>

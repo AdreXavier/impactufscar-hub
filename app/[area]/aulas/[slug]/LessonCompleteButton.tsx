@@ -42,10 +42,10 @@ export default function LessonCompleteButton({
     <button
       onClick={handleClick}
       disabled={loading}
-      className={`inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-colors ${
+      className={`inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-200 ${
         completed
-          ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900 dark:text-green-300'
-          : 'bg-green-600 text-white hover:bg-green-700 disabled:opacity-50'
+          ? 'border border-[#50001F] text-[#d4a0b0] hover:bg-[#2a0d18]'
+          : 'bg-[#c4395a] hover:bg-[#d94d6b] text-white shadow-lg shadow-[#50001F]/50 disabled:opacity-50'
       }`}
     >
       {completed

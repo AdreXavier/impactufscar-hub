@@ -28,15 +28,28 @@ function AreaSection({ slug, title }: { slug: string; title: string }) {
           alignItems: 'center',
           gap: '0.5rem',
           width: '100%',
-          padding: '0.5rem 1rem',
-          background: isActive ? '#7a1040' : 'none',
+          padding: '0.625rem 1rem',
+          background: isActive ? '#50001F' : 'none',
           border: 'none',
           color: isActive ? '#ffffff' : '#d4a0b0',
           fontSize: '0.85rem',
-          fontWeight: isActive ? 600 : 400,
+          fontWeight: isActive ? 500 : 400,
           cursor: 'pointer',
           textAlign: 'left',
-          borderRadius: '4px',
+          borderRadius: '8px',
+          transition: 'background-color 0.15s, color 0.15s',
+        }}
+        onMouseEnter={(e) => {
+          if (!isActive) {
+            e.currentTarget.style.backgroundColor = '#2a0d18'
+            e.currentTarget.style.color = '#ffffff'
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isActive) {
+            e.currentTarget.style.backgroundColor = 'transparent'
+            e.currentTarget.style.color = '#d4a0b0'
+          }
         }}
       >
         {open ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
@@ -85,8 +98,8 @@ export default function Sidebar() {
         left: 0,
         width: '260px',
         height: '100vh',
-        backgroundColor: '#50001F',
-        borderRight: '1px solid #7a1040',
+        backgroundColor: '#1a0009',
+        borderRight: '1px solid #3a0016',
         display: 'flex',
         flexDirection: 'column',
         zIndex: 40,
@@ -97,7 +110,7 @@ export default function Sidebar() {
       <div
         style={{
           padding: '1.25rem 1rem',
-          borderBottom: '1px solid #7a1040',
+          borderBottom: '1px solid #3a0016',
         }}
       >
         <Link
@@ -117,19 +130,20 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav style={{ flex: 1, overflowY: 'auto', padding: '0.75rem 0' }}>
+      <nav style={{ flex: 1, overflowY: 'auto', padding: '0.75rem 0.5rem' }}>
         <Link
           href="/"
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
-            padding: '0.5rem 1rem',
+            padding: '0.625rem 1rem',
             fontSize: '0.85rem',
             color: pathname === '/' ? '#ffffff' : '#d4a0b0',
-            fontWeight: pathname === '/' ? 600 : 400,
-            background: pathname === '/' ? '#7a1040' : 'none',
-            borderRadius: '4px',
+            fontWeight: pathname === '/' ? 500 : 400,
+            background: pathname === '/' ? '#50001F' : 'none',
+            borderRadius: '8px',
+            transition: 'background-color 0.15s, color 0.15s',
           }}
         >
           <Home size={16} />
@@ -138,8 +152,8 @@ export default function Sidebar() {
 
         <div
           style={{
-            margin: '0.75rem 1rem',
-            borderTop: '1px solid #7a1040',
+            margin: '0.75rem 0.5rem',
+            borderTop: '1px solid #3a0016',
           }}
         />
 
@@ -153,7 +167,7 @@ export default function Sidebar() {
         <div
           style={{
             padding: '1rem',
-            borderTop: '1px solid #7a1040',
+            borderTop: '1px solid #3a0016',
             display: 'flex',
             alignItems: 'center',
             gap: '0.75rem',
