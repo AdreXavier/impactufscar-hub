@@ -4,25 +4,30 @@ import { DocsThemeConfig } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   logo: <span>ImpactUFSCar</span>,
   project: {
-    // Esse é o ícone do GitHub que você vê à esquerda do Discord
+    // Esse é o ícone do GitHub que você vê à esquerda
     link: 'https://github.com/AdreXavier/impactufscar-hub',
   },
   chat: {
-    // Esse link agora aponta para o seu Mattermost
+    // Esse link aponta para o seu Mattermost
     link: 'https://impactufscar.dev',
-    // Esse bloco abaixo é o que troca o desenho do Discord pelo do Mattermost
+    // Esse bloco abaixo contém o SVG DETALHADO do design do Mattermost
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M21.2 17.6c0 1.1-.9 2-2 2h-14.4c-1.1 0-2-.9-2-2V6.4c0-1.1.9-2 2-2h14.4c1.1 0 2 .9 2 2v11.2z" fill="#0058CC"/>
-        <path d="M12 16a4 4 0 100-8 4 4 0 000 8z" fill="#fff"/>
-        <path d="M12 14a2 2 0 100-4 2 2 0 000 4z" fill="#0058CC"/>
+      <svg width="24" height="24" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Camadas complexas para criar o efeito de luz e facetas azuis */}
+        <path d="M512 0C229.23 0 0 229.23 0 512C0 794.77 229.23 1024 512 1024C794.77 1024 1024 794.77 1024 512C1024 229.23 794.77 0 512 0ZM720.59 749.12H303.41V472.94L512 264.35L720.59 472.94V749.12Z" fill="#0058CC"/>
+        <path d="M512 264.35L303.41 472.94H442.35V749.12H581.65V472.94H720.59L512 264.35Z" fill="#fff"/>
+        {/* Facetas de luz interna para o efeito geométrico */}
+        <path d="M512 264.35L442.35 402.35L512 472.94L581.65 402.35L512 264.35Z" fill="#A4CFFF"/>
+        <path d="M442.35 402.35V749.12H581.65V402.35L512 472.94L442.35 402.35Z" fill="#A4CFFF"/>
+        <path d="M303.41 472.94L442.35 611.88L512 542.24L442.35 472.94H303.41Z" fill="#A4CFFF"/>
+        <path d="M720.59 472.94L581.65 611.88L512 542.24L581.65 472.94H720.59Z" fill="#A4CFFF"/>
       </svg>
     )
   },
-  // Atualizei aqui para o "Edit this page" apontar para o seu repositório oficial
+  // Repositório oficial para o "Edit this page"
   docsRepositoryBase: 'https://github.com/AdreXavier/impactufscar-hub',
   footer: {
-    // Mudei o texto do rodapé para a sua entidade
+    // Texto do rodapé para a entidade
     text: 'ImpactUFSCar 2026',
   },
 }
