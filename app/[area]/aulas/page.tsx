@@ -22,8 +22,8 @@ export default async function AulasPage({ params }: { params: Promise<{ area: st
         getCompletedLessons(area),
       ])
     }
-  } catch {
-    console.error('Failed to load progress data')
+  } catch (error) {
+    console.error('Failed to load progress data', error)
   }
 
   const completedSet = new Set(completedSlugs)

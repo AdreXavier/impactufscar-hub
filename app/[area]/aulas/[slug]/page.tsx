@@ -21,8 +21,8 @@ export default async function LessonPage({
   let completedSlugs: string[] = []
   try {
     completedSlugs = await getCompletedLessons(area)
-  } catch {
-    console.error('Failed to load completed lessons')
+  } catch (error) {
+    console.error('Failed to load completed lessons', error)
   }
   const isCompleted = completedSlugs.includes(slug)
 

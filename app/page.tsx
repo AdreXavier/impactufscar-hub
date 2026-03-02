@@ -29,8 +29,8 @@ export default async function DashboardPage() {
     userId = authResult.userId
     const user = await currentUser()
     firstName = user?.firstName ?? 'membro'
-  } catch {
-    console.error('Failed to load auth data')
+  } catch (error) {
+    console.error('Failed to load auth data', error)
   }
 
   const areaSlugs = Object.keys(courses)
@@ -39,8 +39,8 @@ export default async function DashboardPage() {
   if (userId) {
     try {
       progressResults = await Promise.all(areaSlugs.map((slug) => getAreaProgress(slug)))
-    } catch {
-      console.error('Failed to load progress data')
+    } catch (error) {
+      console.error('Failed to load progress data', error)
     }
   }
 
