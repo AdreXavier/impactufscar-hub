@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { completeLesson } from '../../../../actions/lessons'
+import { completeLesson } from '../../../actions/lessons'
 
 interface LessonCompleteButtonProps {
   areaSlug: string

@@ -3,10 +3,16 @@ export interface Lesson {
   title: string
 }
 
+export interface Reading {
+  slug: string
+  title: string
+}
+
 export interface Course {
   title: string
   description: string
   lessons: Lesson[]
+  readings: Reading[]
   assessment: string[]
 }
 
@@ -18,6 +24,9 @@ export const courses: Record<string, Course> = {
       { slug: 'introducao', title: 'Introdução à Dinâmica de Sistemas (MIT)' },
       { slug: 'pensamento-sistemico', title: 'Pensamento Sistêmico' },
       { slug: 'modelagem-basica', title: 'Modelagem Básica' },
+    ],
+    readings: [
+      { slug: 'bem-vindo', title: 'Bem-vindo ao Programa de Trainee' },
     ],
     assessment: [
       'O que você entendeu sobre dinâmica de sistemas?',
@@ -33,6 +42,9 @@ export const courses: Record<string, Course> = {
       { slug: 'metodologia', title: 'Metodologia de Pesquisa' },
       { slug: 'publicacoes', title: 'Publicações e Artigos' },
     ],
+    readings: [
+      { slug: 'bem-vindo', title: 'Bem-vindo à Área Acadêmica' },
+    ],
     assessment: [
       'Qual a importância da área acadêmica para a entidade?',
       'Como você contribuiria para a produção acadêmica?',
@@ -46,6 +58,9 @@ export const courses: Record<string, Course> = {
       { slug: 'introducao-metricas', title: 'Introdução a Métricas' },
       { slug: 'kpis', title: 'KPIs e Indicadores' },
       { slug: 'dashboards', title: 'Construção de Dashboards' },
+    ],
+    readings: [
+      { slug: 'bem-vindo', title: 'Bem-vindo à Área de Métricas' },
     ],
     assessment: [
       'O que são KPIs e por que são importantes?',
@@ -61,6 +76,9 @@ export const courses: Record<string, Course> = {
       { slug: 'coleta-dados', title: 'Coleta de Dados' },
       { slug: 'analise-resultados', title: 'Análise de Resultados' },
     ],
+    readings: [
+      { slug: 'bem-vindo', title: 'Bem-vindo à Área de Pesquisa e Mercado' },
+    ],
     assessment: [
       'Qual a diferença entre pesquisa qualitativa e quantitativa?',
       'Como você aplicaria pesquisa de mercado no contexto da entidade?',
@@ -74,6 +92,9 @@ export const courses: Record<string, Course> = {
       { slug: 'introducao-ia', title: 'Introdução à IA e Segurança' },
       { slug: 'riscos', title: 'Riscos e Vulnerabilidades em IA' },
       { slug: 'boas-praticas', title: 'Boas Práticas de Segurança' },
+    ],
+    readings: [
+      { slug: 'bem-vindo', title: 'Bem-vindo à Área de Segurança de IA' },
     ],
     assessment: [
       'Quais são os principais riscos de segurança em sistemas de IA?',
