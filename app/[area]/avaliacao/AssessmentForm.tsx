@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { submitAssessment } from '../../../actions/lessons'
+import { submitAssessment } from '../../actions/lessons'
 
 interface AssessmentFormProps {
   areaSlug: string
@@ -42,10 +42,10 @@ export default function AssessmentForm({ areaSlug, courseTitle, questions }: Ass
             A equipe irá revisar.
           </p>
           <Link
-            href={`/cursos/${areaSlug}`}
+            href={`/${areaSlug}`}
             className="mt-6 inline-block rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
           >
-            Voltar ao curso
+            Voltar à área
           </Link>
         </div>
       </main>
@@ -55,10 +55,10 @@ export default function AssessmentForm({ areaSlug, courseTitle, questions }: Ass
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
       <Link
-        href={`/cursos/${areaSlug}`}
+        href={`/${areaSlug}`}
         className="text-sm text-green-600 hover:underline dark:text-green-400"
       >
-        ← Voltar ao curso
+        ← Voltar à área
       </Link>
 
       <h1 className="mt-4 text-3xl font-bold tracking-tight">

@@ -1,8 +1,8 @@
 import { auth } from '@clerk/nextjs/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { courses } from '../../../lib/courses'
-import { getAreaProgress, getCompletedLessons } from '../../actions/lessons'
+import { courses } from '../../lib/courses'
+import { getAreaProgress, getCompletedLessons } from '../actions/lessons'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,7 +26,7 @@ function ProgressBar({ completed, total }: { completed: number; total: number })
   )
 }
 
-export default async function CourseOverviewPage({ params }: { params: Promise<{ area: string }> }) {
+export default async function AreaOverviewPage({ params }: { params: Promise<{ area: string }> }) {
   const { area } = await params
   const course = courses[area]
   if (!course) notFound()
@@ -50,13 +50,14 @@ export default async function CourseOverviewPage({ params }: { params: Promise<{
 
       <ProgressBar completed={progress.completed} total={progress.total} />
 
-      <div className="mt-8 space-y-3">
+      <h2 className="mt-8 text-xl font-semibold">📚 Aulas</h2>
+      <div className="mt-4 space-y-3">
         {course.lessons.map((lesson, i) => {
           const done = completedSet.has(lesson.slug)
           return (
             <Link
               key={lesson.slug}
-              href={`/cursos/${area}/aula/${lesson.slug}`}
+              href={`/${area}/aulas/${lesson.slug}`}
               className="flex items-center gap-3 rounded-lg border border-gray-200 p-4 transition-shadow hover:shadow-md dark:border-gray-700"
             >
               <span className="text-xl">{done ? '✅' : '🔒'}</span>
@@ -68,9 +69,25 @@ export default async function CourseOverviewPage({ params }: { params: Promise<{
         })}
       </div>
 
+      <h2 className="mt-8 text-xl font-semibold">📖 Leituras</h2>
+      <div className="mt-4 space-y-3">
+        {course.readings.map((reading, i) => (
+          <Link
+            key={reading.slug}
+            href={`/${area}/leituras/${reading.slug}`}
+            className="flex items-center gap-3 rounded-lg border border-gray-200 p-4 transition-shadow hover:shadow-md dark:border-gray-700"
+          >
+            <span className="text-xl">📄</span>
+            <span className="font-medium">
+              {i + 1}. {reading.title}
+            </span>
+          </Link>
+        ))}
+      </div>
+
       <div className="mt-8">
         <Link
-          href={`/cursos/${area}/avaliacao`}
+          href={`/${area}/avaliacao`}
           className="inline-flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
         >
           📝 Avaliação

@@ -69,7 +69,7 @@ export default async function DashboardPage() {
           return (
             <Link
               key={slug}
-              href={`/cursos/${slug}`}
+              href={`/${slug}`}
               className="group rounded-xl border border-gray-200 p-6 transition-shadow hover:shadow-lg dark:border-gray-700"
             >
               <div className="flex items-center gap-3">

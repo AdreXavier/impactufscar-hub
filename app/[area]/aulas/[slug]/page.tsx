@@ -1,7 +1,7 @@
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { courses } from '../../../../../lib/courses'
-import { getCompletedLessons } from '../../../../actions/lessons'
+import { courses } from '../../../../lib/courses'
+import { getCompletedLessons } from '../../../actions/lessons'
 import LessonCompleteButton from './LessonCompleteButton'
 
 export const dynamic = 'force-dynamic'
@@ -27,10 +27,10 @@ export default async function LessonPage({
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
       <Link
-        href={`/cursos/${area}`}
+        href={`/${area}/aulas`}
         className="text-sm text-green-600 hover:underline dark:text-green-400"
       >
-        ← Voltar ao curso
+        ← Voltar às aulas
       </Link>
 
       <h1 className="mt-4 text-3xl font-bold tracking-tight">{lesson.title}</h1>
@@ -50,7 +50,7 @@ export default async function LessonPage({
           lessonSlug={slug}
           initialCompleted={isCompleted}
           nextLessonHref={
-            nextLesson ? `/cursos/${area}/aula/${nextLesson.slug}` : `/cursos/${area}`
+            nextLesson ? `/${area}/aulas/${nextLesson.slug}` : `/${area}/aulas`
           }
         />
       </div>
