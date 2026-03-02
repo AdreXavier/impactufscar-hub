@@ -34,15 +34,24 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(true)
   const [mounted, setMounted] = useState(false)
 
+  // Initialize once on mount
   useEffect(() => {
-    if (isMobile) {
+    if (window.innerWidth < 768) {
       setOpen(false)
     } else {
       const saved = localStorage.getItem('sidebar-open')
       setOpen(saved !== null ? saved === 'true' : true)
     }
     setMounted(true)
-  }, [isMobile])
+  }, [])
+
+  // Close sidebar when switching to mobile
+  useEffect(() => {
+    if (!mounted) return
+    if (isMobile) {
+      setOpen(false)
+    }
+  }, [isMobile, mounted])
 
   const toggle = useCallback(() => {
     setOpen((prev) => {

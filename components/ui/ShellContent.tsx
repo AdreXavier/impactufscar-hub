@@ -7,6 +7,7 @@ export default function ShellContent({ children }: { children: React.ReactNode }
 
   return (
     <div
+      data-shell-content
       className="min-h-screen transition-[margin-left] duration-300 ease-in-out"
       style={{
         marginLeft: open ? '260px' : '0',
@@ -14,7 +15,7 @@ export default function ShellContent({ children }: { children: React.ReactNode }
     >
       <style>{`
         @media (max-width: 767px) {
-          .min-h-screen { margin-left: 0 !important; }
+          [data-shell-content] { margin-left: 0 !important; }
         }
       `}</style>
       {children}
