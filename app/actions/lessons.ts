@@ -71,7 +71,7 @@ export async function getCompletedLessons(areaSlug: string): Promise<string[]> {
   return (data ?? []).map((row) => row.lesson_slug)
 }
 
-export async function submitAssessment(areaSlug: string, answer: string) {
+export async function submitAssessment(areaSlug: string, lessonSlug: string, answer: string) {
   const { userId } = await auth()
   if (!userId) throw new Error('Usuário deve estar autenticado.')
 
@@ -80,6 +80,7 @@ export async function submitAssessment(areaSlug: string, answer: string) {
     .insert({
       user_id: userId,
       area_slug: areaSlug,
+      lesson_slug: lessonSlug,
       answer,
     })
 

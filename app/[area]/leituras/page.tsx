@@ -10,7 +10,7 @@ export default async function LeiturasPage({ params }: { params: Promise<{ area:
   if (!course) notFound()
 
   return (
-    <main className="mx-auto max-w-4xl px-8 py-8">
+    <main className="mx-auto max-w-4xl px-4 py-6 md:px-8 md:py-8">
       <Link href={`/${area}`} className="text-sm text-[#c4395a] hover:text-[#d94d6b] transition-colors">
         ← Voltar para {course.title}
       </Link>

@@ -30,12 +30,12 @@ export default async function AulasPage({ params }: { params: Promise<{ area: st
   const pct = progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0
 
   return (
-    <main className="mx-auto max-w-4xl px-8 py-8">
+    <main className="mx-auto max-w-4xl px-4 py-6 md:px-8 md:py-8">
       <Link href={`/${area}`} className="text-sm text-[#c4395a] hover:text-[#d94d6b] transition-colors">
         ← Voltar para {course.title}
       </Link>
 
-      <h1 className="mt-4 text-3xl font-bold tracking-tight text-white">Aulas — {course.title}</h1>
+      <h1 className="mt-4 text-2xl md:text-3xl font-bold tracking-tight text-white">Aulas — {course.title}</h1>
       <p className="mt-2 text-[#d4a0b0]">
         {progress.completed}/{progress.total} aula{progress.total !== 1 ? 's' : ''} concluída{progress.total !== 1 ? 's' : ''} ({pct}%)
       </p>

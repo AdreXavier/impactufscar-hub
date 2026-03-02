@@ -12,6 +12,7 @@ export default async function AssessmentPage({ params }: { params: Promise<{ are
   return (
     <AssessmentForm
       areaSlug={area}
+      lessonSlug="general"
       courseTitle={course.title}
       questions={course.assessment}
     />

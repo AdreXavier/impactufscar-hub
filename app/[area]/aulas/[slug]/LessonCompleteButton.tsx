@@ -42,7 +42,7 @@ export default function LessonCompleteButton({
     <button
       onClick={handleClick}
       disabled={loading}
-      className={`inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-200 ${
+      className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-200 w-full md:w-auto ${
         completed
           ? 'border border-[#50001F] text-[#d4a0b0] hover:bg-[#2a0d18]'
           : 'bg-[#c4395a] hover:bg-[#d94d6b] text-white shadow-lg shadow-[#50001F]/50 disabled:opacity-50'
