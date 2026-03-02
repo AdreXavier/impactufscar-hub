@@ -29,12 +29,12 @@ export default function TopBar() {
     <header
       style={{
         height: '56px',
-        borderBottom: '1px solid var(--border)',
+        borderBottom: '1px solid #7a1040',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 1.5rem',
-        backgroundColor: 'var(--bg-card)',
+        backgroundColor: '#2a0d18',
       }}
     >
       {/* Breadcrumb */}

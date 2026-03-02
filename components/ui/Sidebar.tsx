@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Home, ChevronDown, ChevronRight } from 'lucide-react'
 import { useUser } from '@clerk/nextjs'
@@ -28,13 +29,14 @@ function AreaSection({ slug, title }: { slug: string; title: string }) {
           gap: '0.5rem',
           width: '100%',
           padding: '0.5rem 1rem',
-          background: 'none',
+          background: isActive ? '#7a1040' : 'none',
           border: 'none',
-          color: isActive ? 'var(--primary)' : 'var(--text-secondary)',
+          color: isActive ? '#ffffff' : '#d4a0b0',
           fontSize: '0.85rem',
           fontWeight: isActive ? 600 : 400,
           cursor: 'pointer',
           textAlign: 'left',
+          borderRadius: '4px',
         }}
       >
         {open ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
@@ -53,10 +55,10 @@ function AreaSection({ slug, title }: { slug: string; title: string }) {
                   display: 'block',
                   padding: '0.35rem 0.75rem',
                   fontSize: '0.8rem',
-                  color: active ? 'var(--primary)' : 'var(--text-secondary)',
+                  color: active ? '#ffffff' : '#d4a0b0',
                   fontWeight: active ? 600 : 400,
                   borderLeft: active
-                    ? '2px solid var(--primary)'
+                    ? '2px solid #c4395a'
                     : '2px solid transparent',
                   transition: 'color 0.15s',
                 }}
@@ -83,8 +85,8 @@ export default function Sidebar() {
         left: 0,
         width: '260px',
         height: '100vh',
-        backgroundColor: 'var(--bg-card)',
-        borderRight: '1px solid var(--border)',
+        backgroundColor: '#50001F',
+        borderRight: '1px solid #7a1040',
         display: 'flex',
         flexDirection: 'column',
         zIndex: 40,
@@ -95,18 +97,22 @@ export default function Sidebar() {
       <div
         style={{
           padding: '1.25rem 1rem',
-          borderBottom: '1px solid var(--border)',
+          borderBottom: '1px solid #7a1040',
         }}
       >
         <Link
           href="/"
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
             fontSize: '1.1rem',
             fontWeight: 700,
-            color: 'var(--text-primary)',
+            color: '#ffffff',
           }}
         >
-          🧩 ImpactUFSCar
+          <Image src="/logo.png" alt="ImpactUFSCar" width={32} height={32} />
+          ImpactUFSCar
         </Link>
       </div>
 
@@ -120,8 +126,10 @@ export default function Sidebar() {
             gap: '0.5rem',
             padding: '0.5rem 1rem',
             fontSize: '0.85rem',
-            color: pathname === '/' ? 'var(--primary)' : 'var(--text-secondary)',
+            color: pathname === '/' ? '#ffffff' : '#d4a0b0',
             fontWeight: pathname === '/' ? 600 : 400,
+            background: pathname === '/' ? '#7a1040' : 'none',
+            borderRadius: '4px',
           }}
         >
           <Home size={16} />
@@ -131,7 +139,7 @@ export default function Sidebar() {
         <div
           style={{
             margin: '0.75rem 1rem',
-            borderTop: '1px solid var(--border)',
+            borderTop: '1px solid #7a1040',
           }}
         />
 
@@ -145,7 +153,7 @@ export default function Sidebar() {
         <div
           style={{
             padding: '1rem',
-            borderTop: '1px solid var(--border)',
+            borderTop: '1px solid #7a1040',
             display: 'flex',
             alignItems: 'center',
             gap: '0.75rem',
@@ -165,7 +173,7 @@ export default function Sidebar() {
           <span
             style={{
               fontSize: '0.85rem',
-              color: 'var(--text-primary)',
+              color: '#ffffff',
               fontWeight: 500,
             }}
           >
