@@ -23,7 +23,7 @@ export async function getProgress(moduleSlugs: string[]) {
 
 export async function markModuleComplete(moduleSlug: string) {
   const { userId } = await auth()
-  if (!userId) throw new Error('Not authenticated')
+  if (!userId) throw new Error('User must be authenticated to mark modules as complete')
 
   const { error } = await getSupabase()
     .from('progress')
@@ -39,7 +39,7 @@ export async function markModuleComplete(moduleSlug: string) {
 
   if (error) {
     console.error('Error updating progress:', error)
-    throw new Error('Failed to update progress')
+    throw new Error('Failed to save progress. Please try again.')
   }
 
   return { success: true }
