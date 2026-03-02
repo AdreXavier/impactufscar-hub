@@ -1,8 +1,8 @@
 import nextra from 'nextra'
 
-// Removi as chaves { theme: ... } porque o Nextra novo 
-// quer os valores direto, separados por vírgula.
-const withNextra = nextra('nextra-theme-docs', './theme.config.tsx')
+// Em versões novas, o Nextra já procura o theme.config.tsx sozinho.
+// Vamos deixar o objeto de configuração vazio para ele não reclamar de chaves desconhecidas.
+const withNextra = nextra({})
 
 export default withNextra({
   reactStrictMode: true,
