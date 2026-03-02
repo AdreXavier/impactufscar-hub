@@ -1,27 +1,28 @@
 import { ClerkProvider } from '@clerk/nextjs'
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
-import { Head } from 'nextra/components'
-import { getPageMap } from 'nextra/page-map'
-import 'nextra-theme-docs/style.css'
+import Sidebar from '../components/ui/Sidebar'
+import TopBar from '../components/ui/TopBar'
+import './globals.css'
 
 export const metadata = {
   title: 'ImpactUFSCar Hub',
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="pt" dir="ltr" suppressHydrationWarning>
-        <Head />
+      <html lang="pt" dir="ltr">
+        <head>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          />
+        </head>
         <body>
-          <Layout
-            navbar={<Navbar logo={<span>ImpactUFSCar</span>} projectLink="https://github.com/AdreXavier/impactufscar-hub" chatLink="https://impactufscar.dev" />}
-            pageMap={await getPageMap()}
-            docsRepositoryBase="https://github.com/AdreXavier/impactufscar-hub"
-            footer={<Footer>ImpactUFSCar 2026</Footer>}
-          >
+          <Sidebar />
+          <div style={{ marginLeft: '260px', minHeight: '100vh' }}>
+            <TopBar />
             {children}
-          </Layout>
+          </div>
         </body>
       </html>
     </ClerkProvider>
