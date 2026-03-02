@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Home, ChevronDown, ChevronRight, X } from 'lucide-react'
-import { useUser } from '@clerk/nextjs'
+import { UserButton, useUser } from '@clerk/nextjs'
 import { courses } from '../../lib/courses'
 import { useSidebar } from './SidebarContext'
 
@@ -106,7 +106,7 @@ export default function Sidebar() {
       {open && (
         <div
           onClick={close}
-          className="fixed inset-0 bg-black/60 z-40 md:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
         />
       )}
 
@@ -153,7 +153,7 @@ export default function Sidebar() {
           </Link>
           <button
             onClick={close}
-            className="md:hidden"
+            className="lg:hidden"
             style={{
               background: 'none',
               border: 'none',
@@ -168,7 +168,7 @@ export default function Sidebar() {
         </div>
 
         {/* Navigation */}
-        <nav style={{ flex: 1, overflowY: 'auto', padding: '0.75rem 0.5rem' }}>
+        <nav className="custom-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '0.75rem 0.5rem' }}>
           <Link
             href="/"
             style={{
@@ -201,27 +201,17 @@ export default function Sidebar() {
         </nav>
 
         {/* User */}
-        {user && (
-          <div
-            style={{
-              padding: '1rem',
-              borderTop: '1px solid #3a0016',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-            }}
-          >
-            {user.imageUrl && (
-              <img
-                src={user.imageUrl}
-                alt={user.firstName ? `${user.firstName}'s profile picture` : 'User avatar'}
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: '50%',
-                }}
-              />
-            )}
+        <div
+          style={{
+            padding: '1rem',
+            borderTop: '1px solid #3a0016',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+          }}
+        >
+          <UserButton />
+          {user && (
             <span
               style={{
                 fontSize: '0.85rem',
@@ -231,8 +221,8 @@ export default function Sidebar() {
             >
               {user.firstName ?? 'Membro'}
             </span>
-          </div>
-        )}
+          )}
+        </div>
       </aside>
     </>
   )

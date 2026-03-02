@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { PlayCircle, BookOpen, FileText, Send, Lightbulb } from 'lucide-react'
 import { submitAssessment } from '../../../actions/lessons'
 import type { LessonReading } from '../../../../lib/courses'
 
@@ -28,10 +29,10 @@ export default function LessonTabs({
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const tabs: { key: Tab; label: string; icon: string }[] = [
-    { key: 'conteudo', label: 'Conteúdo', icon: '📹' },
-    { key: 'leituras', label: 'Leituras', icon: '📖' },
-    { key: 'avaliacao', label: 'Avaliação', icon: '✅' },
+  const tabs: { key: Tab; label: string; icon: typeof PlayCircle }[] = [
+    { key: 'conteudo', label: 'Conteúdo', icon: PlayCircle },
+    { key: 'leituras', label: 'Leituras', icon: BookOpen },
+    { key: 'avaliacao', label: 'Avaliação', icon: FileText },
   ]
 
   async function handleSubmit(e: React.FormEvent) {
@@ -53,75 +54,63 @@ export default function LessonTabs({
   return (
     <div>
       {/* Tabs */}
-      <div
-        className="flex overflow-x-auto"
-        style={{
-          borderBottom: '2px solid #50001F',
-          marginTop: '1.5rem',
-          gap: '0',
-        }}
-      >
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className="flex-shrink-0 whitespace-nowrap"
-            style={{
-              padding: '0.75rem 1.25rem',
-              fontSize: '0.9rem',
-              fontWeight: activeTab === tab.key ? 600 : 400,
-              color: activeTab === tab.key ? '#ffffff' : '#d4a0b0',
-              background: 'none',
-              border: 'none',
-              borderBottom:
-                activeTab === tab.key ? '2px solid #c4395a' : '2px solid transparent',
-              marginBottom: '-2px',
-              cursor: 'pointer',
-              transition: 'color 0.15s, border-color 0.15s',
-            }}
-          >
-            {tab.icon} {tab.label}
-          </button>
-        ))}
+      <div className="border-b border-[#3a0016]">
+        <div className="flex gap-8">
+          {tabs.map((tab) => {
+            const TabIcon = tab.icon
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`pb-4 text-sm font-semibold flex items-center gap-2 transition-all relative ${activeTab === tab.key ? 'text-[#c4395a]' : 'text-[#d4a0b0] hover:text-white'}`}
+              >
+                <TabIcon size={16} />
+                {tab.label}
+                {activeTab === tab.key && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#c4395a] rounded-full"></div>}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* Tab content */}
-      <div className="mt-6">
-        {activeTab === 'conteudo' && <div>{children}</div>}
+      <div className="py-4">
+        {activeTab === 'conteudo' && (
+          <div className="space-y-4 text-[#d4a0b0] leading-relaxed">{children}</div>
+        )}
 
         {activeTab === 'leituras' && (
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-4">
-              📖 Leituras — {lessonTitle}
-            </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {leituras.length === 0 ? (
-              <p className="text-[#7a4055] text-sm italic">
+              <p className="text-[#7a4055] text-sm italic col-span-2">
                 Nenhuma leitura disponível para esta aula.
               </p>
             ) : (
-              <div className="space-y-3">
-                {leituras.map((leitura, i) => (
-                  <a
-                    key={i}
-                    href={leitura.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 rounded-xl border border-[#50001F] bg-[#2a0d18] p-4 transition-all hover:bg-[#3a1525]"
-                  >
-                    <span className="text-xl">📄</span>
-                    <span className="font-medium text-white">{leitura.title}</span>
-                  </a>
-                ))}
-              </div>
+              leituras.map((leitura, i) => (
+                <a
+                  key={i}
+                  href={leitura.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#1a0009] border border-[#3a0016] p-4 rounded-xl flex items-center justify-between hover:bg-[#2a0d18] transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-[#50001F]/20 text-[#c4395a] rounded-lg">
+                      <BookOpen size={18} />
+                    </div>
+                    <span className="font-medium text-white text-sm">{leitura.title}</span>
+                  </div>
+                  <span className="text-[#c4395a] hover:bg-[#50001F]/20 p-2 rounded-lg transition-colors">
+                    <Send size={18} className="rotate-90" />
+                  </span>
+                </a>
+              ))
             )}
           </div>
         )}
 
         {activeTab === 'avaliacao' && (
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-4">
-              ✅ Avaliação — {lessonTitle}
-            </h2>
+          <div className="space-y-6">
             {submitted ? (
               <div className="rounded-xl border border-[#50001F] bg-[#2a0d18] p-8 text-center">
                 <h3 className="text-2xl font-bold tracking-tight text-white">
@@ -137,34 +126,40 @@ export default function LessonTabs({
               </p>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <p className="text-[#d4a0b0]">
-                  Responda às perguntas abaixo com suas próprias palavras.
-                </p>
+                <div className="bg-[#50001F]/10 border border-[#50001F]/30 p-4 rounded-2xl flex items-start gap-4">
+                  <div className="text-[#c4395a] mt-1">
+                    <Lightbulb size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-white">Dica Importante</p>
+                    <p className="text-sm text-[#d4a0b0]">💡 Responda com suas próprias palavras para melhor retenção do conhecimento. Não há limite de caracteres.</p>
+                  </div>
+                </div>
+
                 {avaliacao.map((question, i) => (
-                  <div key={i}>
-                    <label className="block text-sm font-medium mb-2 text-white">
-                      {i + 1}. {question}
-                    </label>
+                  <div key={i} className="space-y-3">
+                    <p className="text-white font-medium text-sm">{i + 1}. {question}</p>
                     <textarea
                       required
-                      rows={4}
                       value={answers[i]}
                       onChange={(e) => {
                         const next = [...answers]
                         next[i] = e.target.value
                         setAnswers(next)
                       }}
-                      className="w-full bg-[#2a0d18] border border-[#50001F] rounded-xl p-4 text-white placeholder-[#7a4055] focus:outline-none focus:ring-2 focus:ring-[#c4395a] resize-none min-h-[120px] transition-all"
-                      placeholder="Escreva sua resposta aqui..."
+                      className="w-full bg-[#1a0009] border border-[#3a0016] rounded-2xl p-4 text-white text-sm focus:outline-none focus:border-[#c4395a] transition-colors min-h-[120px] placeholder:text-[#d4a0b0]/30"
+                      placeholder="Digite sua resposta aqui..."
                     />
                   </div>
                 ))}
+
                 <button
                   type="submit"
                   disabled={loading}
-                  className="bg-[#c4395a] hover:bg-[#d94d6b] text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-[#50001F]/50 disabled:opacity-50 w-full md:w-auto"
+                  className="w-full py-4 rounded-2xl bg-[#50001F] hover:bg-[#c4395a] text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-[#c4395a]/20 disabled:opacity-50"
                 >
-                  {loading ? 'Enviando...' : 'Enviar avaliação'}
+                  <Send size={18} />
+                  {loading ? 'Enviando...' : 'Enviar Avaliação'}
                 </button>
               </form>
             )}

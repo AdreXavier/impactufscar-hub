@@ -14,7 +14,7 @@ export default function ShellContent({ children }: { children: React.ReactNode }
       }}
     >
       <style>{`
-        @media (max-width: 767px) {
+        @media (max-width: 1023px) {
           [data-shell-content] { margin-left: 0 !important; }
         }
       `}</style>
