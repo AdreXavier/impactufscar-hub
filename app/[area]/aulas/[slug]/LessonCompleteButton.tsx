@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { completeLesson } from '../../../actions/lessons'
@@ -25,24 +25,23 @@ export default function LessonCompleteButton({
   nextLessonHref,
 }: LessonCompleteButtonProps) {
   const [completed, setCompleted] = useState(initialCompleted)
-  const [loading, setLoading] = useState(false)
+  const [isPending, startTransition] = useTransition()
   const router = useRouter()
 
-  async function handleClick() {
-    if (completed) {
-      router.push(nextLessonHref)
-      return
-    }
-    setLoading(true)
-    try {
-      await completeLesson(areaSlug, lessonSlug)
-      setCompleted(true)
-      router.push(nextLessonHref)
-    } catch (error) {
-      console.error('Failed to mark lesson as complete:', error)
-    } finally {
-      setLoading(false)
-    }
+  function handleClick() {
+    if (completed) return
+
+    startTransition(async () => {
+      try {
+        const result = await completeLesson(areaSlug, lessonSlug)
+        if (result?.success) {
+          setCompleted(true)
+          router.refresh()
+        }
+      } catch (error) {
+        console.error('Failed to mark lesson as complete:', error)
+      }
+    })
   }
 
   const progressPct = totalLessons > 0 ? ((currentIndex + 1) / totalLessons) * 100 : 0
@@ -76,14 +75,10 @@ export default function LessonCompleteButton({
           )}
           <button
             onClick={handleClick}
-            disabled={loading}
-            className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-[#50001F] text-white text-sm font-bold hover:bg-[#c4395a] transition-all whitespace-nowrap disabled:opacity-50"
+            disabled={isPending || completed}
+            className={`flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-white text-sm font-bold transition-all whitespace-nowrap disabled:opacity-50 ${completed ? 'bg-green-600 cursor-not-allowed' : 'bg-[#50001F] hover:bg-[#c4395a]'}`}
           >
-            {completed
-              ? '✓ Concluída — Próxima aula'
-              : loading
-                ? 'Salvando...'
-                : 'Marcar como Concluída'}
+            {completed ? 'Concluída ✅' : isPending ? 'Salvando...' : 'Marcar como Concluída'}
           </button>
           <button
             onClick={() => router.push(nextLessonHref)}

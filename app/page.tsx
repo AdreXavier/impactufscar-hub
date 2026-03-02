@@ -27,14 +27,14 @@ const areaIcons: Record<string, typeof GraduationCap> = {
 }
 
 export default async function DashboardPage() {
-  let firstName = 'membro'
+  let firstName = ''
   let userId: string | null = null
 
   try {
     const authResult = await auth()
     userId = authResult.userId
     const user = await currentUser()
-    firstName = user?.firstName ?? 'membro'
+    firstName = user?.firstName ?? ''
   } catch (error) {
     console.error('Failed to load auth data', error)
   }
@@ -58,7 +58,9 @@ export default async function DashboardPage() {
     <main className="max-w-6xl mx-auto space-y-8 p-6 lg:p-10">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Olá, {firstName}! 👋</h1>
+          <h1 className="text-3xl font-bold text-white tracking-tight">
+            {firstName ? `Olá, ${firstName}! 👋` : 'Olá! 👋'}
+          </h1>
           <p className="text-[#d4a0b0]">Seja bem-vindo de volta ao seu painel de aprendizado.</p>
         </div>
         <div className="flex gap-2">
