@@ -45,7 +45,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <main style={{ maxWidth: '960px', margin: '0 auto', padding: '2rem' }}>
+    <main style={{ maxWidth: '960px', margin: '0 auto', padding: '2rem 1rem' }}>
       <h1 style={{ fontSize: '1.8rem', fontWeight: 700, letterSpacing: '-0.025em' }}>
         Olá, {firstName}! 👋
       </h1>
@@ -54,10 +54,8 @@ export default async function DashboardPage() {
       </p>
 
       <div
+        className="grid gap-5 mt-10"
         style={{
-          marginTop: '2.5rem',
-          display: 'grid',
-          gap: '1.25rem',
           gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
         }}
       >

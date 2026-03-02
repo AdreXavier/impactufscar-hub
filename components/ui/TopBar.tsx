@@ -1,12 +1,14 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Search } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { UserButton } from '@clerk/nextjs'
 import { courses } from '../../lib/courses'
+import { useSidebar } from './SidebarContext'
 
 export default function TopBar() {
   const pathname = usePathname()
+  const { toggle } = useSidebar()
 
   const segments = pathname.split('/').filter(Boolean)
   const areaSlug = segments[0] ?? null
@@ -33,42 +35,66 @@ export default function TopBar() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 1.5rem',
+        padding: '0 1rem',
         backgroundColor: '#1a0009',
+        position: 'sticky',
+        top: 0,
+        zIndex: 30,
       }}
     >
-      {/* Breadcrumb */}
-      <nav style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem' }}>
-        {crumbs.map((crumb, i) => (
-          <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-            {i > 0 && <span style={{ color: '#7a4055' }}>&gt;</span>}
-            {crumb.href ? (
-              <a href={crumb.href} style={{ color: '#7a4055', transition: 'color 0.15s' }}>
-                {crumb.label}
-              </a>
-            ) : (
-              <span style={{ color: '#ffffff', fontWeight: 500 }}>
-                {crumb.label}
-              </span>
-            )}
-          </span>
-        ))}
-      </nav>
-
-      {/* Right side */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      {/* Left: hamburger + breadcrumb */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0, flex: 1 }}>
         <button
+          onClick={toggle}
           style={{
             background: 'none',
             border: 'none',
-            color: '#7a4055',
+            color: '#d4a0b0',
             cursor: 'pointer',
             padding: '0.25rem',
+            flexShrink: 0,
           }}
-          aria-label="Search"
+          aria-label="Toggle menu"
         >
-          <Search size={18} />
+          <Menu size={22} />
         </button>
+
+        {/* Breadcrumb - hidden on mobile, title shown instead */}
+        <nav className="hidden md:flex" style={{ alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem' }}>
+          {crumbs.map((crumb, i) => (
+            <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              {i > 0 && <span style={{ color: '#7a4055' }}>&gt;</span>}
+              {crumb.href ? (
+                <a href={crumb.href} style={{ color: '#7a4055', transition: 'color 0.15s' }}>
+                  {crumb.label}
+                </a>
+              ) : (
+                <span style={{ color: '#ffffff', fontWeight: 500 }}>
+                  {crumb.label}
+                </span>
+              )}
+            </span>
+          ))}
+        </nav>
+
+        {/* Mobile title */}
+        <span
+          className="md:hidden"
+          style={{
+            fontSize: '1rem',
+            fontWeight: 600,
+            color: '#ffffff',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          ImpactUFSCar
+        </span>
+      </div>
+
+      {/* Right side */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexShrink: 0 }}>
         <UserButton />
       </div>
     </header>

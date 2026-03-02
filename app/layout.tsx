@@ -1,23 +1,13 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import Sidebar from '../components/ui/Sidebar'
 import TopBar from '../components/ui/TopBar'
+import { SidebarProvider } from '../components/ui/SidebarContext'
+import ShellContent from '../components/ui/ShellContent'
 import './globals.css'
 
 export const metadata = {
   title: 'ImpactUFSCar Hub',
   icons: { icon: '/logo.png' },
-}
-
-function Shell({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <Sidebar />
-      <div style={{ marginLeft: '260px', minHeight: '100vh' }}>
-        <TopBar />
-        {children}
-      </div>
-    </>
-  )
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -33,7 +23,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </head>
         <body>
-          <Shell>{children}</Shell>
+          <SidebarProvider>
+            <Sidebar />
+            <ShellContent>
+              <TopBar />
+              {children}
+            </ShellContent>
+          </SidebarProvider>
         </body>
       </html>
     </ClerkProvider>

@@ -6,11 +6,12 @@ import { submitAssessment } from '../../actions/lessons'
 
 interface AssessmentFormProps {
   areaSlug: string
+  lessonSlug: string
   courseTitle: string
   questions: string[]
 }
 
-export default function AssessmentForm({ areaSlug, courseTitle, questions }: AssessmentFormProps) {
+export default function AssessmentForm({ areaSlug, lessonSlug, courseTitle, questions }: AssessmentFormProps) {
   const [answers, setAnswers] = useState<string[]>(new Array(questions.length).fill(''))
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -22,7 +23,7 @@ export default function AssessmentForm({ areaSlug, courseTitle, questions }: Ass
       const combined = questions
         .map((q, i) => `**${q}**\n${answers[i]}`)
         .join('\n\n---\n\n')
-      await submitAssessment(areaSlug, combined)
+      await submitAssessment(areaSlug, lessonSlug, combined)
       setSubmitted(true)
     } catch (error) {
       console.error('Failed to submit assessment:', error)
