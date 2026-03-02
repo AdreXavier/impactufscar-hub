@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { PlayCircle, BookOpen, FileText, Send, Lightbulb } from 'lucide-react'
 import { submitAssessment } from '../../../actions/lessons'
 import type { LessonReading } from '../../../../lib/courses'
@@ -27,7 +27,7 @@ export default function LessonTabs({
   const [activeTab, setActiveTab] = useState<Tab>('conteudo')
   const [answers, setAnswers] = useState<string[]>(new Array(avaliacao.length).fill(''))
   const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
   const tabs: { key: Tab; label: string; icon: typeof PlayCircle }[] = [
     { key: 'conteudo', label: 'Conteúdo', icon: PlayCircle },
@@ -37,18 +37,17 @@ export default function LessonTabs({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setLoading(true)
-    try {
-      const combined = avaliacao
-        .map((q, i) => `**${q}**\n${answers[i]}`)
-        .join('\n\n---\n\n')
-      await submitAssessment(areaSlug, lessonSlug, combined)
-      setSubmitted(true)
-    } catch (error) {
-      console.error('Failed to submit assessment:', error)
-    } finally {
-      setLoading(false)
-    }
+    startTransition(async () => {
+      try {
+        const payload = avaliacao.map((q, i) => `**${q}**\n${answers[i]}`)
+        const result = await submitAssessment(areaSlug, lessonSlug, payload)
+        if (result?.success) {
+          setSubmitted(true)
+        }
+      } catch (error) {
+        console.error('Failed to submit assessment:', error)
+      }
+    })
   }
 
   return (
@@ -117,7 +116,7 @@ export default function LessonTabs({
                   ✅ Resposta enviada!
                 </h3>
                 <p className="mt-2 text-[#d4a0b0]">
-                  A equipe irá revisar.
+                  Resposta enviada! A equipe irá revisar em breve. 🎉
                 </p>
               </div>
             ) : avaliacao.length === 0 ? (
@@ -155,11 +154,11 @@ export default function LessonTabs({
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={isPending}
                   className="w-full py-4 rounded-2xl bg-[#50001F] hover:bg-[#c4395a] text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-[#c4395a]/20 disabled:opacity-50"
                 >
                   <Send size={18} />
-                  {loading ? 'Enviando...' : 'Enviar Avaliação'}
+                  {isPending ? 'Enviando...' : 'Enviar Avaliação'}
                 </button>
               </form>
             )}
