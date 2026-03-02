@@ -15,7 +15,6 @@ export async function completeLesson(areaSlug: string, lessonSlug: string) {
         user_id: userId,
         area_slug: areaSlug,
         lesson_slug: lessonSlug,
-        completed_at: new Date().toISOString(),
       },
       { onConflict: 'user_id,area_slug,lesson_slug' }
     )
@@ -82,7 +81,6 @@ export async function submitAssessment(areaSlug: string, answer: string) {
       user_id: userId,
       area_slug: areaSlug,
       answer,
-      submitted_at: new Date().toISOString(),
     })
 
   if (error) {

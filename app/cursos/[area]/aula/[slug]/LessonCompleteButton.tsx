@@ -31,7 +31,6 @@ export default function LessonCompleteButton({
       await completeLesson(areaSlug, lessonSlug)
       setCompleted(true)
       router.push(nextLessonHref)
-      router.refresh()
     } catch (error) {
       console.error('Failed to mark lesson as complete:', error)
     } finally {
