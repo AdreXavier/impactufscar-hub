@@ -11,16 +11,16 @@ function ProgressBar({ completed, total }: { completed: number; total: number })
   const pct = total > 0 ? Math.round((completed / total) * 100) : 0
   return (
     <div className="mt-4">
-      <div className="flex justify-between text-sm mb-1.5 text-slate-400">
+      <div className="flex justify-between text-sm mb-1.5" style={{ color: '#8b92a8' }}>
         <span>
           {completed}/{total} aula{total !== 1 ? 's' : ''} concluída{total !== 1 ? 's' : ''}
         </span>
-        <span className="font-medium text-slate-300">{pct}%</span>
+        <span style={{ fontWeight: 600, color: '#e8eaf0' }}>{pct}%</span>
       </div>
-      <div className="h-1.5 w-full rounded-full bg-slate-700/50 overflow-hidden">
+      <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.06)' }}>
         <div
-          className="h-full rounded-full transition-all bg-gradient-to-r from-indigo-500 to-violet-500"
-          style={{ width: `${pct}%` }}
+          className="h-full rounded-full transition-all"
+          style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #7c5cfc, #a78bfa)' }}
         />
       </div>
     </div>
@@ -51,18 +51,18 @@ export default async function AreaOverviewPage({ params }: { params: Promise<{ a
 
   return (
     <main className="mx-auto max-w-5xl p-6 lg:p-10 space-y-6">
-      <nav className="flex items-center gap-2 text-xs font-medium text-slate-400">
+      <nav className="flex items-center gap-2 text-xs font-medium" style={{ color: '#8b92a8' }}>
         <Link href="/" className="hover:text-white transition-colors">Home</Link>
         <ChevronRight size={12} />
         <span className="text-white">{course.title}</span>
       </nav>
 
-      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">{course.title}</h1>
-      <p className="text-slate-400">{course.description}</p>
+      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white" style={{ fontFamily: "'Playfair Display', serif" }}>{course.title}</h1>
+      <p style={{ color: '#8b92a8' }}>{course.description}</p>
 
       <ProgressBar completed={progress.completed} total={progress.total} />
 
-      <h2 className="mt-10 text-xs uppercase tracking-widest text-indigo-400 font-semibold">📚 Aulas</h2>
+      <h2 className="mt-10 text-xs uppercase tracking-widest font-semibold" style={{ color: '#a78bfa' }}>📚 Aulas</h2>
       <div className="space-y-3">
         {course.lessons.map((lesson, i) => {
           const done = completedSet.has(lesson.slug)
@@ -70,13 +70,16 @@ export default async function AreaOverviewPage({ params }: { params: Promise<{ a
             <Link
               key={lesson.slug}
               href={`/${area}/aulas/${lesson.slug}`}
-              className="flex items-center gap-4 rounded-xl border border-slate-700/50 bg-slate-800/60 p-4 transition-all hover:bg-slate-800 hover:border-indigo-500/30 group"
+              className="flex items-center gap-4 rounded-xl p-4 transition-all group"
+              style={{ backgroundColor: '#141929', border: '1px solid rgba(255,255,255,0.06)' }}
             >
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                done
-                  ? 'bg-emerald-500/15 text-emerald-400'
-                  : 'bg-slate-700/50 text-slate-500'
-              }`}>
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center"
+                style={done
+                  ? { backgroundColor: 'rgba(45,212,160,0.1)', color: '#2dd4a0' }
+                  : { backgroundColor: 'rgba(255,255,255,0.04)', color: '#5a6178' }
+                }
+              >
                 {done ? (
                   <span className="text-lg">✓</span>
                 ) : (
@@ -88,20 +91,22 @@ export default async function AreaOverviewPage({ params }: { params: Promise<{ a
                   {i + 1}. {lesson.title}
                 </span>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-xs text-slate-500 flex items-center gap-1">
+                  <span className="text-xs flex items-center gap-1" style={{ color: '#5a6178' }}>
                     <BookOpen size={11} />
                     {lesson.leituras.length} leitura{lesson.leituras.length !== 1 ? 's' : ''}
                   </span>
-                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                    done
-                      ? 'text-emerald-400 bg-emerald-500/10'
-                      : 'text-slate-500 bg-slate-700/30'
-                  }`}>
+                  <span
+                    className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                    style={done
+                      ? { color: '#2dd4a0', backgroundColor: 'rgba(45,212,160,0.1)' }
+                      : { color: '#5a6178', backgroundColor: 'rgba(255,255,255,0.04)' }
+                    }
+                  >
                     {done ? 'Concluída' : 'Pendente'}
                   </span>
                 </div>
               </div>
-              <ChevronRight size={16} className="text-slate-600 group-hover:text-indigo-400 transition-colors" />
+              <ChevronRight size={16} className="text-[#3d4459] group-hover:text-[#a78bfa] transition-colors" />
             </Link>
           )
         })}

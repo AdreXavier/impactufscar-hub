@@ -11,21 +11,33 @@ interface MetricCardProps {
 
 export default function MetricCard({ title, value, icon: Icon, subtitle, trend }: MetricCardProps) {
   return (
-    <div className="bg-slate-800/60 border border-slate-700/50 p-5 rounded-2xl hover:border-indigo-500/30 transition-all duration-300 group">
-      <div className="flex items-start justify-between mb-3">
-        <div className="w-11 h-11 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500/20 transition-colors">
-          <Icon size={22} />
+    <div
+      className="relative overflow-hidden rounded-2xl p-5 transition-all duration-300 group"
+      style={{
+        backgroundColor: '#141929',
+        border: '1px solid rgba(255,255,255,0.06)',
+      }}
+    >
+      {/* Subtle glow on hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'radial-gradient(circle at 50% 0%, rgba(124,92,252,0.06) 0%, transparent 70%)' }} />
+
+      <div className="relative flex items-start justify-between mb-4">
+        <div
+          className="w-11 h-11 rounded-xl flex items-center justify-center"
+          style={{ backgroundColor: 'rgba(124,92,252,0.1)' }}
+        >
+          <Icon size={20} className="text-[#a78bfa]" />
         </div>
         {trend && (
-          <span className="flex items-center gap-1 text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-lg">
-            <TrendingUp size={12} />
+          <span className="flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full" style={{ backgroundColor: 'rgba(45,212,160,0.1)', color: '#2dd4a0' }}>
+            <TrendingUp size={11} />
             {trend}
           </span>
         )}
       </div>
-      <p className="text-2xl font-bold text-white tracking-tight">{value}</p>
-      <p className="text-xs font-medium text-slate-400 mt-1">{title}</p>
-      {subtitle && <p className="text-[11px] text-slate-500 mt-0.5">{subtitle}</p>}
+      <p className="text-3xl font-bold text-white tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>{value}</p>
+      <p className="text-[13px] font-medium text-[#8b92a8] mt-1">{title}</p>
+      {subtitle && <p className="text-[11px] text-[#5a6178] mt-0.5">{subtitle}</p>}
     </div>
   )
 }

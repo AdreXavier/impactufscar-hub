@@ -6,46 +6,49 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import {
   Home,
+  Compass,
+  BookOpen,
+  Bookmark,
+  Settings,
+  LogOut,
   ChevronDown,
   ChevronRight,
   X,
-  BookOpen,
-  Settings,
+  User,
 } from 'lucide-react'
-import { UserButton, useUser } from '@clerk/nextjs'
+import { UserButton, useUser, useClerk } from '@clerk/nextjs'
 import { courses } from '../../lib/courses'
 import { useSidebar } from './SidebarContext'
 
 function NavItem({
   icon: Icon,
   label,
-  href,
   active = false,
+  href,
   onClick,
 }: {
   icon: React.ElementType
   label: string
-  href?: string
   active?: boolean
+  href?: string
   onClick?: () => void
 }) {
-  const content = (
+  const inner = (
     <span
-      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer w-full ${
+      className={`flex items-center gap-3 w-full px-4 py-2.5 rounded-lg text-[13px] font-medium transition-all duration-200 ${
         active
-          ? 'bg-indigo-500/15 text-indigo-400'
-          : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+          ? 'bg-[#7c5cfc]/10 text-[#a78bfa] border-l-2 border-[#7c5cfc]'
+          : 'text-[#8b92a8] hover:text-[#e8eaf0] hover:bg-white/[0.04]'
       }`}
     >
-      <Icon size={18} strokeWidth={active ? 2.2 : 1.8} />
-      {label}
+      <Icon size={18} strokeWidth={1.8} />
+      <span className="truncate">{label}</span>
     </span>
   )
 
-  if (href) {
-    return <Link href={href}>{content}</Link>
-  }
-  return <button onClick={onClick} className="w-full text-left">{content}</button>
+  if (href) return <Link href={href}>{inner}</Link>
+  if (onClick) return <button onClick={onClick} className="w-full text-left">{inner}</button>
+  return <div className="cursor-default">{inner}</div>
 }
 
 function AreaSection({ slug, title }: { slug: string; title: string }) {
@@ -55,28 +58,28 @@ function AreaSection({ slug, title }: { slug: string; title: string }) {
   const course = courses[slug]
 
   return (
-    <div className="mb-0.5">
+    <div className="mb-px">
       <button
         onClick={() => setOpen(!open)}
-        className={`flex items-center gap-2.5 w-full px-3 py-2 rounded-xl text-sm transition-all duration-200 ${
+        className={`flex items-center gap-3 w-full px-4 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
           isActive
-            ? 'bg-indigo-500/10 text-indigo-400 font-medium'
-            : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+            ? 'text-[#a78bfa]'
+            : 'text-[#8b92a8] hover:text-[#e8eaf0] hover:bg-white/[0.04]'
         }`}
       >
-        <BookOpen size={16} strokeWidth={isActive ? 2.2 : 1.8} />
+        <BookOpen size={16} strokeWidth={1.8} />
         <span className="flex-1 text-left truncate">{title}</span>
-        {open ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+        {open ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
       </button>
 
       {open && (
-        <div className="ml-7 mt-1 space-y-0.5 border-l border-slate-700/50 pl-3">
+        <div className="ml-8 mt-0.5 space-y-px border-l border-white/[0.06] pl-3">
           <Link
             href={`/${slug}`}
-            className={`block py-1.5 px-2 text-xs rounded-lg transition-colors ${
+            className={`block py-1.5 px-3 text-[12px] rounded transition-colors ${
               pathname === `/${slug}`
-                ? 'text-indigo-400 font-semibold bg-indigo-500/10'
-                : 'text-slate-500 hover:text-slate-300'
+                ? 'text-[#a78bfa] font-semibold'
+                : 'text-[#6b7280] hover:text-[#e8eaf0]'
             }`}
           >
             Visão Geral
@@ -88,10 +91,10 @@ function AreaSection({ slug, title }: { slug: string; title: string }) {
               <Link
                 key={lesson.slug}
                 href={lessonHref}
-                className={`block py-1.5 px-2 text-xs rounded-lg transition-colors ${
+                className={`block py-1.5 px-3 text-[12px] rounded transition-colors ${
                   active
-                    ? 'text-indigo-400 font-semibold bg-indigo-500/10'
-                    : 'text-slate-500 hover:text-slate-300'
+                    ? 'text-[#a78bfa] font-semibold'
+                    : 'text-[#6b7280] hover:text-[#e8eaf0]'
                 }`}
               >
                 {lesson.title}
@@ -107,6 +110,7 @@ function AreaSection({ slug, title }: { slug: string; title: string }) {
 export default function Sidebar() {
   const pathname = usePathname()
   const { user } = useUser()
+  const { signOut } = useClerk()
   const { open, close } = useSidebar()
 
   return (
@@ -114,27 +118,31 @@ export default function Sidebar() {
       {open && (
         <div
           onClick={close}
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 lg:hidden"
         />
       )}
 
       <aside
-        className="fixed top-0 left-0 w-[260px] h-screen bg-slate-900 border-r border-slate-800 flex flex-col z-50 transition-transform duration-300 ease-in-out"
-        style={{ transform: open ? 'translateX(0)' : 'translateX(-100%)' }}
+        className="fixed top-0 left-0 w-[260px] h-screen flex flex-col z-50 transition-transform duration-300 ease-in-out"
+        style={{
+          transform: open ? 'translateX(0)' : 'translateX(-100%)',
+          backgroundColor: '#0f1321',
+          borderRight: '1px solid rgba(255,255,255,0.06)',
+        }}
       >
         {/* Logo */}
-        <div className="px-4 py-5 border-b border-slate-800 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-indigo-500/20 flex items-center justify-center">
-              <Image src="/logo.png" alt="ImpactUFSCar" width={24} height={24} />
+        <div className="px-5 py-5 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+          <Link href="/" className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #7c5cfc 0%, #a78bfa 100%)' }}>
+              <Image src="/logo.png" alt="ImpactUFSCar" width={22} height={22} />
             </div>
-            <span className="text-base font-bold text-white tracking-tight">
+            <span className="text-[15px] font-bold text-white tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
               ImpactUFSCar
             </span>
           </Link>
           <button
             onClick={close}
-            className="lg:hidden text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors"
+            className="lg:hidden text-[#8b92a8] hover:text-white p-1 rounded transition-colors"
             aria-label="Fechar menu"
           >
             <X size={18} />
@@ -142,16 +150,14 @@ export default function Sidebar() {
         </div>
 
         {/* Navigation */}
-        <nav className="custom-scrollbar flex-1 overflow-y-auto px-3 py-4 space-y-1">
-          <NavItem
-            icon={Home}
-            label="Home"
-            href="/"
-            active={pathname === '/'}
-          />
-          <div className="pt-4 pb-2 px-3">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-600">
-              Áreas de Estudo
+        <nav className="custom-scrollbar flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
+          <NavItem icon={Home} label="Início" href="/" active={pathname === '/'} />
+          <NavItem icon={Compass} label="Explorar" href="/" active={false} />
+          <NavItem icon={Bookmark} label="Salvos" href="/" active={false} />
+
+          <div className="pt-5 pb-2 px-4">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#4b5066]">
+              Trilhas de Estudo
             </span>
           </div>
 
@@ -160,17 +166,16 @@ export default function Sidebar() {
           ))}
         </nav>
 
-        {/* Bottom Section */}
-        <div className="border-t border-slate-800 p-3 space-y-1">
+        {/* Bottom */}
+        <div className="px-3 pb-3 space-y-0.5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '12px' }}>
           <NavItem icon={Settings} label="Configurações" />
-          <div className="flex items-center gap-3 px-3 py-3 mt-2 rounded-xl bg-slate-800/50">
+          <NavItem icon={LogOut} label="Sair" onClick={() => signOut()} />
+          <div className="flex items-center gap-3 px-4 py-3 mt-2 rounded-lg" style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}>
             <UserButton />
             {user && (
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">
-                  {user.firstName ?? 'Membro'}
-                </p>
-                <p className="text-xs text-slate-500 truncate">Estudante</p>
+                <p className="text-[13px] font-medium text-white truncate">{user.firstName ?? 'Membro'}</p>
+                <p className="text-[11px] text-[#6b7280] truncate">Estudante</p>
               </div>
             )}
           </div>

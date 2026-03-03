@@ -2,16 +2,16 @@ export type BadgeVariant = 'em-progresso' | 'concluido' | 'pendente'
 
 const variantStyles: Record<BadgeVariant, React.CSSProperties> = {
   'em-progresso': {
-    backgroundColor: 'rgba(245, 158, 11, 0.12)',
-    color: '#fbbf24',
+    backgroundColor: 'rgba(245, 166, 35, 0.1)',
+    color: '#f5a623',
   },
   concluido: {
-    backgroundColor: 'rgba(16, 185, 129, 0.12)',
-    color: '#34d399',
+    backgroundColor: 'rgba(45, 212, 160, 0.1)',
+    color: '#2dd4a0',
   },
   pendente: {
-    backgroundColor: 'rgba(148, 163, 184, 0.12)',
-    color: '#94a3b8',
+    backgroundColor: 'rgba(139, 146, 168, 0.08)',
+    color: '#8b92a8',
   },
 }
 

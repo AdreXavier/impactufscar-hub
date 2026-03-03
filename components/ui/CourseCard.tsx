@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { LucideIcon } from 'lucide-react'
-import { ArrowRight, Clock, Play } from 'lucide-react'
+import { Play, Clock } from 'lucide-react'
 
 interface CourseCardProps {
   slug: string
@@ -27,58 +27,67 @@ export default function CourseCard({
         ? 'Em progresso'
         : 'Pendente'
   const cta = completed > 0 ? 'Continuar' : 'Começar'
-  const statusColor =
+
+  const statusStyle =
     completed === total && total > 0
-      ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+      ? { color: '#2dd4a0', backgroundColor: 'rgba(45,212,160,0.1)' }
       : completed > 0
-        ? 'text-amber-400 bg-amber-500/10 border-amber-500/20'
-        : 'text-slate-400 bg-slate-500/10 border-slate-500/20'
+        ? { color: '#f5a623', backgroundColor: 'rgba(245,166,35,0.1)' }
+        : { color: '#8b92a8', backgroundColor: 'rgba(139,146,168,0.08)' }
 
   return (
     <Link
       href={`/${slug}`}
-      className="bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden group hover:border-indigo-500/40 transition-all duration-300 flex flex-col"
+      className="group flex flex-col rounded-2xl overflow-hidden transition-all duration-300"
+      style={{
+        backgroundColor: '#141929',
+        border: '1px solid rgba(255,255,255,0.06)',
+      }}
     >
-      {/* Header */}
-      <div className="h-24 bg-gradient-to-br from-indigo-600/20 via-slate-800 to-slate-900 p-5 flex items-center gap-4 relative overflow-hidden">
-        <Icon size={64} className="absolute -right-3 -top-3 text-indigo-500/5 rotate-12 group-hover:rotate-0 transition-transform duration-700" />
-        <div className="w-12 h-12 rounded-xl bg-indigo-500/15 backdrop-blur-md flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500/25 transition-colors">
-          <Icon size={24} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <h3 className="text-white font-semibold text-base leading-tight truncate">{title}</h3>
-          <span className="text-xs text-slate-400">{total} aulas</span>
+      {/* Header gradient */}
+      <div className="relative h-28 p-5 flex items-end overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(124,92,252,0.15) 0%, #141929 100%)' }}>
+        <Icon size={56} className="absolute -right-2 -top-2 opacity-[0.04] rotate-12 group-hover:rotate-0 transition-transform duration-700 text-white" />
+        <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(124,92,252,0.12)' }}>
+          <Icon size={22} className="text-[#a78bfa]" />
         </div>
       </div>
 
       {/* Body */}
       <div className="p-5 flex-1 flex flex-col">
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-xs text-slate-400">{description}</span>
-          <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full border ${statusColor}`}>
+        <div className="flex justify-between items-start mb-1.5">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[#7c5cfc]">{description}</span>
+          <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full" style={statusStyle}>
             {status}
           </span>
         </div>
+        <h3 className="text-white font-semibold text-[17px] leading-snug mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>{title}</h3>
 
-        <div className="mt-auto space-y-4">
-          {/* Progress bar */}
-          <div>
-            <div className="flex justify-between text-xs text-slate-500 mb-1.5">
-              <span>{completed}/{total} concluídas</span>
-              <span className="font-medium text-slate-300">{pct}%</span>
+        <div className="mt-auto space-y-3">
+          {/* Progress */}
+          <div className="space-y-1.5">
+            <div className="flex justify-between text-[11px] text-[#8b92a8]">
+              <span>Progresso</span>
+              <span className="font-medium text-[#e8eaf0]">{pct}%</span>
             </div>
-            <div className="h-1.5 w-full bg-slate-700/50 rounded-full overflow-hidden">
+            <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.06)' }}>
               <div
-                className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-1000 ease-out rounded-full"
-                style={{ width: `${pct}%` }}
+                className="h-full rounded-full transition-all duration-1000 ease-out"
+                style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #7c5cfc, #a78bfa)' }}
               />
             </div>
           </div>
 
           {/* CTA */}
-          <span className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-slate-700/30 border border-slate-700/50 text-slate-300 text-sm font-medium group-hover:bg-indigo-500/15 group-hover:text-indigo-400 group-hover:border-indigo-500/30 transition-all duration-300">
-            {completed > 0 ? <Play size={14} /> : <ArrowRight size={14} />}
-            {cta}
+          <span
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-300 group-hover:shadow-lg"
+            style={{
+              border: '1px solid rgba(255,255,255,0.06)',
+              color: '#8b92a8',
+              backgroundColor: 'rgba(255,255,255,0.02)',
+            }}
+          >
+            <Play size={14} className="group-hover:text-[#a78bfa] transition-colors" />
+            <span className="group-hover:text-white transition-colors">{cta}</span>
           </span>
         </div>
       </div>
