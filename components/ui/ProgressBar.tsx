@@ -16,21 +16,21 @@ export default function ProgressBar({
           display: 'flex',
           justifyContent: 'space-between',
           fontSize: '0.75rem',
-          color: 'var(--text-secondary)',
+          color: '#8b92a8',
           marginBottom: '0.25rem',
         }}
       >
         <span>
           {completed}/{total} concluído{total !== 1 ? 's' : ''}
         </span>
-        <span>{pct}%</span>
+        <span style={{ fontWeight: 600, color: '#e8eaf0' }}>{pct}%</span>
       </div>
       <div
         style={{
-          height: '8px',
+          height: '6px',
           width: '100%',
           borderRadius: '999px',
-          backgroundColor: 'var(--border)',
+          backgroundColor: 'rgba(255,255,255,0.06)',
           overflow: 'hidden',
         }}
       >
@@ -39,7 +39,7 @@ export default function ProgressBar({
             height: '100%',
             width: `${pct}%`,
             borderRadius: '999px',
-            background: 'linear-gradient(90deg, #c4395a, #ff6b8a)',
+            background: 'linear-gradient(90deg, #7c5cfc, #a78bfa)',
             transition: 'width 0.5s ease',
           }}
         />

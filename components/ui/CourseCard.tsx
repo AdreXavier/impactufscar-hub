@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { LucideIcon } from 'lucide-react'
+import { Play, Clock } from 'lucide-react'
 
 interface CourseCardProps {
   slug: string
@@ -27,41 +28,66 @@ export default function CourseCard({
         : 'Pendente'
   const cta = completed > 0 ? 'Continuar' : 'Começar'
 
+  const statusStyle =
+    completed === total && total > 0
+      ? { color: '#2dd4a0', backgroundColor: 'rgba(45,212,160,0.1)' }
+      : completed > 0
+        ? { color: '#f5a623', backgroundColor: 'rgba(245,166,35,0.1)' }
+        : { color: '#8b92a8', backgroundColor: 'rgba(139,146,168,0.08)' }
+
   return (
     <Link
       href={`/${slug}`}
-      className="bg-[#1a0009] border border-[#3a0016] rounded-2xl overflow-hidden group hover:border-[#c4395a]/30 transition-all duration-500 flex flex-col"
+      className="group flex flex-col rounded-2xl overflow-hidden transition-all duration-300"
+      style={{
+        backgroundColor: '#141929',
+        border: '1px solid rgba(255,255,255,0.06)',
+      }}
     >
-      <div className="h-28 bg-gradient-to-br from-[#50001F] to-[#2a0d18] p-6 flex items-end relative overflow-hidden">
-        <Icon size={48} className="absolute -right-2 -top-2 text-white/5 rotate-12 group-hover:rotate-0 transition-transform duration-700" />
-        <div className="bg-white/10 backdrop-blur-md p-2 rounded-lg text-white">
-          <Icon size={20} />
+      {/* Header gradient */}
+      <div className="relative h-28 p-5 flex items-end overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(124,92,252,0.15) 0%, #141929 100%)' }}>
+        <Icon size={56} className="absolute -right-2 -top-2 opacity-[0.04] rotate-12 group-hover:rotate-0 transition-transform duration-700 text-white" />
+        <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(124,92,252,0.12)' }}>
+          <Icon size={22} className="text-[#a78bfa]" />
         </div>
       </div>
+
+      {/* Body */}
       <div className="p-5 flex-1 flex flex-col">
-        <div className="flex justify-between items-start mb-2">
-          <span className="text-[10px] font-bold text-[#c4395a] uppercase tracking-tighter">{description}</span>
-          <span className="bg-[#50001F]/30 text-[#d4a0b0] text-[10px] px-2 py-0.5 rounded-full border border-[#50001F]/50">{status}</span>
+        <div className="flex justify-between items-start mb-1.5">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[#7c5cfc]">{description}</span>
+          <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full" style={statusStyle}>
+            {status}
+          </span>
         </div>
-        <h3 className="text-white font-semibold text-lg leading-tight mb-4">{title}</h3>
+        <h3 className="text-white font-semibold text-[17px] leading-snug mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>{title}</h3>
 
         <div className="mt-auto space-y-3">
+          {/* Progress */}
           <div className="space-y-1.5">
-            <div className="flex justify-between text-[11px] text-[#d4a0b0]">
+            <div className="flex justify-between text-[11px] text-[#8b92a8]">
               <span>Progresso</span>
-              <span>{pct}%</span>
+              <span className="font-medium text-[#e8eaf0]">{pct}%</span>
             </div>
-            <div className="h-1.5 w-full bg-[#0f0f1a] rounded-full overflow-hidden">
+            <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.06)' }}>
               <div
-                className="h-full bg-gradient-to-r from-[#50001F] to-[#c4395a] transition-all duration-1000 ease-out"
-                style={{ width: `${pct}%` }}
+                className="h-full rounded-full transition-all duration-1000 ease-out"
+                style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #7c5cfc, #a78bfa)' }}
               />
             </div>
           </div>
+
+          {/* CTA */}
           <span
-            className="block w-full py-2.5 rounded-xl bg-[#1a0009] border border-[#3a0016] text-white text-sm font-medium text-center group-hover:bg-[#50001F] transition-all duration-300"
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-300 group-hover:shadow-lg"
+            style={{
+              border: '1px solid rgba(255,255,255,0.06)',
+              color: '#8b92a8',
+              backgroundColor: 'rgba(255,255,255,0.02)',
+            }}
           >
-            {cta}
+            <Play size={14} className="group-hover:text-[#a78bfa] transition-colors" />
+            <span className="group-hover:text-white transition-colors">{cta}</span>
           </span>
         </div>
       </div>

@@ -13,8 +13,8 @@ export default function NotFoundPage() {
         textAlign: 'center',
       }}
     >
-      <h1 style={{ fontSize: '3rem', fontWeight: 700 }}>404</h1>
-      <p style={{ marginTop: '0.75rem', fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
+      <h1 style={{ fontSize: '3rem', fontWeight: 700, color: '#e8eaf0', fontFamily: "'Playfair Display', serif" }}>404</h1>
+      <p style={{ marginTop: '0.75rem', fontSize: '1.1rem', color: '#8b92a8' }}>
         Página não encontrada.
       </p>
       <Link
@@ -22,9 +22,9 @@ export default function NotFoundPage() {
         style={{
           marginTop: '1.5rem',
           padding: '0.6rem 1.5rem',
-          backgroundColor: 'var(--brand-primary, #50001F)',
+          background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)',
           color: '#ffffff',
-          borderRadius: '8px',
+          borderRadius: '12px',
           fontSize: '0.9rem',
           fontWeight: 600,
           textDecoration: 'none',

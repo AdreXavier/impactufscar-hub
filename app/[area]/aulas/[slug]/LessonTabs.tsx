@@ -53,7 +53,7 @@ export default function LessonTabs({
   return (
     <div>
       {/* Tabs */}
-      <div className="border-b border-[#3a0016]">
+      <div style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="flex gap-8">
           {tabs.map((tab) => {
             const TabIcon = tab.icon
@@ -61,11 +61,12 @@ export default function LessonTabs({
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`pb-4 text-sm font-semibold flex items-center gap-2 transition-all relative ${activeTab === tab.key ? 'text-[#c4395a]' : 'text-[#d4a0b0] hover:text-white'}`}
+                className="pb-4 text-sm font-semibold flex items-center gap-2 transition-all relative"
+                style={{ color: activeTab === tab.key ? '#a78bfa' : '#8b92a8' }}
               >
                 <TabIcon size={16} />
                 {tab.label}
-                {activeTab === tab.key && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#c4395a] rounded-full"></div>}
+                {activeTab === tab.key && <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full" style={{ backgroundColor: '#7c5cfc' }}></div>}
               </button>
             )
           })}
@@ -75,13 +76,13 @@ export default function LessonTabs({
       {/* Tab content */}
       <div className="py-4">
         {activeTab === 'conteudo' && (
-          <div className="space-y-4 text-[#d4a0b0] leading-relaxed">{children}</div>
+          <div className="space-y-4 leading-relaxed" style={{ color: '#8b92a8' }}>{children}</div>
         )}
 
         {activeTab === 'leituras' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {leituras.length === 0 ? (
-              <p className="text-[#7a4055] text-sm italic col-span-2">
+              <p className="text-sm italic col-span-2" style={{ color: '#5a6178' }}>
                 Nenhuma leitura disponível para esta aula.
               </p>
             ) : (
@@ -91,15 +92,16 @@ export default function LessonTabs({
                   href={leitura.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#1a0009] border border-[#3a0016] p-4 rounded-xl flex items-center justify-between hover:bg-[#2a0d18] transition-colors cursor-pointer"
+                  className="p-4 rounded-xl flex items-center justify-between transition-all cursor-pointer"
+                  style={{ backgroundColor: '#141929', border: '1px solid rgba(255,255,255,0.06)' }}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-[#50001F]/20 text-[#c4395a] rounded-lg">
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: 'rgba(124,92,252,0.1)', color: '#a78bfa' }}>
                       <BookOpen size={18} />
                     </div>
                     <span className="font-medium text-white text-sm">{leitura.title}</span>
                   </div>
-                  <span className="text-[#c4395a] hover:bg-[#50001F]/20 p-2 rounded-lg transition-colors">
+                  <span className="p-2 rounded-lg transition-colors" style={{ color: '#a78bfa' }}>
                     <Send size={18} className="rotate-90" />
                   </span>
                 </a>
@@ -111,27 +113,27 @@ export default function LessonTabs({
         {activeTab === 'avaliacao' && (
           <div className="space-y-6">
             {submitted ? (
-              <div className="rounded-xl border border-[#50001F] bg-[#2a0d18] p-8 text-center">
-                <h3 className="text-2xl font-bold tracking-tight text-white">
+              <div className="rounded-xl p-8 text-center" style={{ border: '1px solid rgba(124,92,252,0.2)', backgroundColor: 'rgba(124,92,252,0.05)' }}>
+                <h3 className="text-2xl font-bold tracking-tight text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
                   ✅ Resposta enviada!
                 </h3>
-                <p className="mt-2 text-[#d4a0b0]">
+                <p className="mt-2" style={{ color: '#8b92a8' }}>
                   Resposta enviada! A equipe irá revisar em breve. 🎉
                 </p>
               </div>
             ) : avaliacao.length === 0 ? (
-              <p className="text-[#7a4055] text-sm italic">
+              <p className="text-sm italic" style={{ color: '#5a6178' }}>
                 Nenhuma avaliação disponível para esta aula.
               </p>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="bg-[#50001F]/10 border border-[#50001F]/30 p-4 rounded-2xl flex items-start gap-4">
-                  <div className="text-[#c4395a] mt-1">
+                <div className="p-4 rounded-2xl flex items-start gap-4" style={{ backgroundColor: 'rgba(245,166,35,0.05)', border: '1px solid rgba(245,166,35,0.15)' }}>
+                  <div className="mt-1" style={{ color: '#f5a623' }}>
                     <Lightbulb size={20} />
                   </div>
                   <div>
                     <p className="text-sm font-bold text-white">Dica Importante</p>
-                    <p className="text-sm text-[#d4a0b0]">💡 Responda com suas próprias palavras para melhor retenção do conhecimento. Não há limite de caracteres.</p>
+                    <p className="text-sm" style={{ color: '#8b92a8' }}>💡 Responda com suas próprias palavras para melhor retenção do conhecimento. Não há limite de caracteres.</p>
                   </div>
                 </div>
 
@@ -146,7 +148,12 @@ export default function LessonTabs({
                         next[i] = e.target.value
                         setAnswers(next)
                       }}
-                      className="w-full bg-[#1a0009] border border-[#3a0016] rounded-2xl p-4 text-white text-sm focus:outline-none focus:border-[#c4395a] transition-colors min-h-[120px] placeholder:text-[#d4a0b0]/30"
+                      className="w-full rounded-xl p-4 text-white text-sm focus:outline-none transition-colors min-h-[120px]"
+                      style={{
+                        backgroundColor: '#141929',
+                        border: '1px solid rgba(255,255,255,0.06)',
+                        color: '#e8eaf0',
+                      }}
                       placeholder="Digite sua resposta aqui..."
                     />
                   </div>
@@ -155,7 +162,8 @@ export default function LessonTabs({
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="w-full py-4 rounded-2xl bg-[#50001F] hover:bg-[#c4395a] text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-[#c4395a]/20 disabled:opacity-50"
+                  className="w-full py-4 rounded-xl text-white font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                  style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}
                 >
                   <Send size={18} />
                   {isPending ? 'Enviando...' : 'Enviar Avaliação'}

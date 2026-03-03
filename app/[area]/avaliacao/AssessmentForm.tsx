@@ -36,16 +36,17 @@ export default function AssessmentForm({ areaSlug, lessonSlug, courseTitle, ques
   if (submitted) {
     return (
       <main className="mx-auto max-w-5xl p-6 lg:p-10 text-center">
-        <div className="rounded-2xl border border-[#3a0016] bg-[#1a0009] p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-white">
+        <div className="rounded-2xl p-8" style={{ border: '1px solid rgba(124,92,252,0.2)', backgroundColor: 'rgba(124,92,252,0.05)' }}>
+          <h2 className="text-2xl font-bold tracking-tight text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
             ✅ Resposta enviada!
           </h2>
-          <p className="mt-2 text-[#d4a0b0]">
+          <p className="mt-2" style={{ color: '#8b92a8' }}>
             A equipe irá revisar.
           </p>
           <Link
             href={`/${areaSlug}`}
-            className="mt-6 inline-block bg-[#50001F] hover:bg-[#c4395a] text-white font-bold px-6 py-3 rounded-2xl transition-all duration-200 shadow-lg"
+            className="mt-6 inline-block text-white font-bold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg"
+            style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}
           >
             Voltar à área
           </Link>
@@ -56,26 +57,26 @@ export default function AssessmentForm({ areaSlug, lessonSlug, courseTitle, ques
 
   return (
     <main className="mx-auto max-w-5xl p-6 lg:p-10 space-y-6">
-      <nav className="flex items-center gap-2 text-xs font-medium text-[#d4a0b0]">
-        <Link href="/" className="hover:text-white">Home</Link>
+      <nav className="flex items-center gap-2 text-xs font-medium" style={{ color: '#8b92a8' }}>
+        <Link href="/" className="hover:text-white transition-colors">Home</Link>
         <ChevronRight size={12} />
-        <Link href={`/${areaSlug}`} className="text-[#c4395a] hover:text-white">{courseTitle}</Link>
+        <Link href={`/${areaSlug}`} className="hover:text-white transition-colors" style={{ color: '#a78bfa' }}>{courseTitle}</Link>
         <ChevronRight size={12} />
         <span className="text-white">Avaliação</span>
       </nav>
 
-      <h1 className="text-3xl font-bold tracking-tight text-white">
+      <h1 className="text-3xl font-bold tracking-tight text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
         Avaliação — {courseTitle}
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-[#50001F]/10 border border-[#50001F]/30 p-4 rounded-2xl flex items-start gap-4">
-          <div className="text-[#c4395a] mt-1">
+        <div className="p-4 rounded-2xl flex items-start gap-4" style={{ backgroundColor: 'rgba(245,166,35,0.05)', border: '1px solid rgba(245,166,35,0.15)' }}>
+          <div className="mt-1" style={{ color: '#f5a623' }}>
             <Lightbulb size={20} />
           </div>
           <div>
             <p className="text-sm font-bold text-white">Dica Importante</p>
-            <p className="text-sm text-[#d4a0b0]">💡 Responda com suas próprias palavras para melhor retenção do conhecimento. Não há limite de caracteres.</p>
+            <p className="text-sm" style={{ color: '#8b92a8' }}>💡 Responda com suas próprias palavras para melhor retenção do conhecimento. Não há limite de caracteres.</p>
           </div>
         </div>
 
@@ -92,7 +93,11 @@ export default function AssessmentForm({ areaSlug, lessonSlug, courseTitle, ques
                 next[i] = e.target.value
                 setAnswers(next)
               }}
-              className="w-full bg-[#1a0009] border border-[#3a0016] rounded-2xl p-4 text-white text-sm focus:outline-none focus:border-[#c4395a] transition-colors min-h-[120px] placeholder:text-[#d4a0b0]/30"
+              className="w-full rounded-xl p-4 text-white text-sm focus:outline-none transition-colors min-h-[120px]"
+              style={{
+                backgroundColor: '#141929',
+                border: '1px solid rgba(255,255,255,0.06)',
+              }}
               placeholder="Digite sua resposta aqui..."
             />
           </div>
@@ -101,7 +106,8 @@ export default function AssessmentForm({ areaSlug, lessonSlug, courseTitle, ques
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-4 rounded-2xl bg-[#50001F] hover:bg-[#c4395a] text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-[#c4395a]/20 disabled:opacity-50"
+          className="w-full py-4 rounded-xl text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg disabled:opacity-50"
+          style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}
         >
           <Send size={18} />
           {loading ? 'Enviando...' : 'Enviar Avaliação'}

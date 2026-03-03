@@ -10,50 +10,33 @@ export default function TopBar() {
   const pathname = usePathname()
   const { toggle } = useSidebar()
 
-  const segments = pathname.split('/').filter(Boolean)
-  const areaSlug = segments[0] ?? null
-  const area = areaSlug && courses[areaSlug] ? courses[areaSlug] : null
-
-  const crumbs: { label: string; href?: string }[] = [{ label: 'Home', href: '/' }]
-  if (area && areaSlug) {
-    crumbs.push({ label: area.title, href: `/${areaSlug}` })
-    if (segments[1]) {
-      const labels: Record<string, string> = {
-        aulas: 'Aulas',
-        leituras: 'Leituras',
-        avaliacao: 'Avaliação',
-      }
-      crumbs.push({ label: labels[segments[1]] ?? segments[1] })
-    }
-  }
-
   return (
-    <header className="lg:hidden sticky top-0 z-40"
+    <header
+      className="lg:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3"
       style={{
-        borderBottom: '1px solid #3a0016',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '1rem',
-        backgroundColor: '#0f0f1a',
+        backgroundColor: 'rgba(11,15,25,0.92)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <div className="w-8 h-8 rounded-lg bg-[#50001F] flex items-center justify-center font-bold text-white">I</div>
-        <span className="text-lg font-bold text-white">Impact</span>
+      <div className="flex items-center gap-3">
+        <div
+          className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold"
+          style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}
+        >
+          I
+        </div>
+        <span className="text-[15px] font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+          Impact
+        </span>
       </div>
       <button
         onClick={toggle}
-        style={{
-          background: 'none',
-          border: 'none',
-          color: '#ffffff',
-          cursor: 'pointer',
-          padding: '0.5rem',
-        }}
+        className="text-[#8b92a8] hover:text-white p-2 rounded-lg transition-colors"
+        style={{ backgroundColor: 'rgba(255,255,255,0.04)' }}
         aria-label="Toggle menu"
       >
-        <Menu size={24} />
+        <Menu size={20} />
       </button>
     </header>
   )

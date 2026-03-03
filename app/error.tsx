@@ -19,8 +19,8 @@ export default function ErrorPage({
         textAlign: 'center',
       }}
     >
-      <h1 style={{ fontSize: '2rem', fontWeight: 700 }}>Algo deu errado</h1>
-      <p style={{ marginTop: '0.75rem', color: 'var(--text-secondary)' }}>
+      <h1 style={{ fontSize: '2rem', fontWeight: 700, color: '#e8eaf0', fontFamily: "'Playfair Display', serif" }}>Algo deu errado</h1>
+      <p style={{ marginTop: '0.75rem', color: '#8b92a8' }}>
         Ocorreu um erro inesperado. Tente novamente.
       </p>
       <button
@@ -28,10 +28,10 @@ export default function ErrorPage({
         style={{
           marginTop: '1.5rem',
           padding: '0.6rem 1.5rem',
-          backgroundColor: 'var(--brand-primary, #50001F)',
+          background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)',
           color: '#ffffff',
           border: 'none',
-          borderRadius: '8px',
+          borderRadius: '12px',
           fontSize: '0.9rem',
           fontWeight: 600,
           cursor: 'pointer',
