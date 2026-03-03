@@ -14,46 +14,18 @@ export default function TopBar() {
   const areaSlug = segments[0] ?? null
   const area = areaSlug && courses[areaSlug] ? courses[areaSlug] : null
 
-  const crumbs: { label: string; href?: string }[] = [{ label: 'Home', href: '/' }]
-  if (area && areaSlug) {
-    crumbs.push({ label: area.title, href: `/${areaSlug}` })
-    if (segments[1]) {
-      const labels: Record<string, string> = {
-        aulas: 'Aulas',
-        leituras: 'Leituras',
-        avaliacao: 'Avaliação',
-      }
-      crumbs.push({ label: labels[segments[1]] ?? segments[1] })
-    }
-  }
-
   return (
-    <header className="lg:hidden sticky top-0 z-40"
-      style={{
-        borderBottom: '1px solid #3a0016',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '1rem',
-        backgroundColor: '#0f0f1a',
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <div className="w-8 h-8 rounded-lg bg-[#50001F] flex items-center justify-center font-bold text-white">I</div>
-        <span className="text-lg font-bold text-white">Impact</span>
+    <header className="lg:hidden sticky top-0 z-40 border-b border-slate-800 flex items-center justify-between px-4 py-3 bg-slate-900/95 backdrop-blur-md">
+      <div className="flex items-center gap-3">
+        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center font-bold text-indigo-400 text-sm">I</div>
+        <span className="text-base font-bold text-white tracking-tight">Impact</span>
       </div>
       <button
         onClick={toggle}
-        style={{
-          background: 'none',
-          border: 'none',
-          color: '#ffffff',
-          cursor: 'pointer',
-          padding: '0.5rem',
-        }}
+        className="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition-colors"
         aria-label="Toggle menu"
       >
-        <Menu size={24} />
+        <Menu size={22} />
       </button>
     </header>
   )

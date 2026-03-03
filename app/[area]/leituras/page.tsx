@@ -12,16 +12,16 @@ export default async function LeiturasPage({ params }: { params: Promise<{ area:
 
   return (
     <main className="mx-auto max-w-5xl p-6 lg:p-10 space-y-6">
-      <nav className="flex items-center gap-2 text-xs font-medium text-[#d4a0b0]">
-        <Link href="/" className="hover:text-white">Home</Link>
+      <nav className="flex items-center gap-2 text-xs font-medium text-slate-400">
+        <Link href="/" className="hover:text-white transition-colors">Home</Link>
         <ChevronRight size={12} />
-        <Link href={`/${area}`} className="text-[#c4395a] hover:text-white">{course.title}</Link>
+        <Link href={`/${area}`} className="text-indigo-400 hover:text-white transition-colors">{course.title}</Link>
         <ChevronRight size={12} />
         <span className="text-white">Leituras</span>
       </nav>
 
       <h1 className="text-3xl font-bold tracking-tight text-white">Leituras — {course.title}</h1>
-      <p className="text-[#d4a0b0]">
+      <p className="text-slate-400">
         Materiais de leitura e referências da área.
       </p>
 
@@ -30,15 +30,15 @@ export default async function LeiturasPage({ params }: { params: Promise<{ area:
           <Link
             key={reading.slug}
             href={`/${area}/leituras/${reading.slug}`}
-            className="bg-[#1a0009] border border-[#3a0016] p-4 rounded-xl flex items-center justify-between hover:bg-[#2a0d18] transition-colors cursor-pointer"
+            className="bg-slate-800/60 border border-slate-700/50 p-4 rounded-xl flex items-center justify-between hover:bg-slate-800 hover:border-indigo-500/30 transition-all cursor-pointer"
           >
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-[#50001F]/20 text-[#c4395a] rounded-lg">
+              <div className="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg">
                 <BookOpen size={18} />
               </div>
               <span className="font-medium text-white text-sm">{reading.title}</span>
             </div>
-            <span className="text-[#c4395a] p-2 rounded-lg">
+            <span className="text-indigo-400 p-2 rounded-lg">
               <Send size={18} className="rotate-90" />
             </span>
           </Link>

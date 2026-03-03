@@ -47,12 +47,12 @@ export default function LessonCompleteButton({
   const progressPct = totalLessons > 0 ? ((currentIndex + 1) / totalLessons) * 100 : 0
 
   return (
-    <div className="fixed bottom-0 left-0 lg:left-[260px] right-0 bg-[#0f0f1a]/80 backdrop-blur-xl border-t border-[#3a0016] p-4 px-6 z-40">
+    <div className="fixed bottom-0 left-0 lg:left-[260px] right-0 bg-slate-900/80 backdrop-blur-xl border-t border-slate-800 p-4 px-6 z-40">
       <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
         <div className="hidden sm:flex items-center gap-4">
           <span className="text-sm font-bold text-white whitespace-nowrap">Aula {currentIndex + 1} de {totalLessons}</span>
-          <div className="h-1 w-24 bg-[#1a0009] rounded-full overflow-hidden">
-            <div className="h-full bg-[#c4395a]" style={{ width: `${progressPct}%` }}></div>
+          <div className="h-1 w-24 bg-slate-700/50 rounded-full overflow-hidden">
+            <div className="h-full bg-indigo-500" style={{ width: `${progressPct}%` }}></div>
           </div>
         </div>
 
@@ -60,14 +60,14 @@ export default function LessonCompleteButton({
           {prevLessonHref ? (
             <button
               onClick={() => router.push(prevLessonHref)}
-              className="p-2 rounded-xl border border-[#3a0016] text-[#d4a0b0] hover:text-white transition-colors"
+              className="p-2 rounded-xl border border-slate-700/50 text-slate-400 hover:text-white hover:border-indigo-500/30 transition-all"
             >
               <ArrowLeft size={20} />
             </button>
           ) : (
             <button
               disabled
-              className="p-2 rounded-xl border border-[#3a0016] text-[#3a0016] cursor-not-allowed"
+              className="p-2 rounded-xl border border-slate-800 text-slate-700 cursor-not-allowed"
               aria-label="Sem aula anterior"
             >
               <ArrowLeft size={20} />
@@ -76,13 +76,13 @@ export default function LessonCompleteButton({
           <button
             onClick={handleClick}
             disabled={isPending || completed}
-            className={`flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-white text-sm font-bold transition-all whitespace-nowrap disabled:opacity-50 ${completed ? 'bg-green-600 cursor-not-allowed' : 'bg-[#50001F] hover:bg-[#c4395a]'}`}
+            className={`flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-white text-sm font-bold transition-all whitespace-nowrap disabled:opacity-50 ${completed ? 'bg-emerald-600 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-500'}`}
           >
             {completed ? 'Concluída ✅' : isPending ? 'Salvando...' : 'Marcar como Concluída'}
           </button>
           <button
             onClick={() => router.push(nextLessonHref)}
-            className="p-2 rounded-xl border border-[#3a0016] text-[#d4a0b0] hover:text-white transition-colors"
+            className="p-2 rounded-xl border border-slate-700/50 text-slate-400 hover:text-white hover:border-indigo-500/30 transition-all"
           >
             <ArrowRight size={20} />
           </button>

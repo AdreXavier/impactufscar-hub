@@ -16,7 +16,7 @@ export default function ProgressBar({
           display: 'flex',
           justifyContent: 'space-between',
           fontSize: '0.75rem',
-          color: 'var(--text-secondary)',
+          color: '#94a3b8',
           marginBottom: '0.25rem',
         }}
       >
@@ -27,10 +27,10 @@ export default function ProgressBar({
       </div>
       <div
         style={{
-          height: '8px',
+          height: '6px',
           width: '100%',
           borderRadius: '999px',
-          backgroundColor: 'var(--border)',
+          backgroundColor: 'rgba(51, 65, 85, 0.5)',
           overflow: 'hidden',
         }}
       >
@@ -39,7 +39,7 @@ export default function ProgressBar({
             height: '100%',
             width: `${pct}%`,
             borderRadius: '999px',
-            background: 'linear-gradient(90deg, #c4395a, #ff6b8a)',
+            background: 'linear-gradient(90deg, #6366f1, #8b5cf6)',
             transition: 'width 0.5s ease',
           }}
         />
