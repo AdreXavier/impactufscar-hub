@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ChevronRight, BookOpen, Clock } from 'lucide-react'
+import { ChevronRight, BookOpen } from 'lucide-react'
 import { courses } from '../../lib/courses'
 import { getAreaProgress, getCompletedLessons } from '../actions/lessons'
 
@@ -89,7 +89,7 @@ export default async function AreaOverviewPage({ params }: { params: Promise<{ a
                 </span>
                 <div className="flex items-center gap-2 mt-0.5">
                   <span className="text-xs text-slate-500 flex items-center gap-1">
-                    <Clock size={11} />
+                    <BookOpen size={11} />
                     {lesson.leituras.length} leitura{lesson.leituras.length !== 1 ? 's' : ''}
                   </span>
                   <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${

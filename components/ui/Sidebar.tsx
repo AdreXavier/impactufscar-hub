@@ -10,9 +10,7 @@ import {
   ChevronRight,
   X,
   BookOpen,
-  Compass,
   Settings,
-  LogOut,
 } from 'lucide-react'
 import { UserButton, useUser } from '@clerk/nextjs'
 import { courses } from '../../lib/courses'
@@ -151,13 +149,6 @@ export default function Sidebar() {
             href="/"
             active={pathname === '/'}
           />
-          <NavItem
-            icon={Compass}
-            label="Explorar"
-            href="/"
-            active={false}
-          />
-
           <div className="pt-4 pb-2 px-3">
             <span className="text-[10px] font-bold uppercase tracking-widest text-slate-600">
               Áreas de Estudo
