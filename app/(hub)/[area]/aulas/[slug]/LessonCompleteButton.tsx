@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { completeLesson } from '../../../actions/lessons'
+import { completeLesson } from '../../../../actions/lessons'
 
 interface LessonCompleteButtonProps {
   areaSlug: string

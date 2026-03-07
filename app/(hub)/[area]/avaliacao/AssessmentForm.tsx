@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Send, Lightbulb, ChevronRight } from 'lucide-react'
-import { submitAssessment } from '../../actions/lessons'
+import { submitAssessment } from '../../../actions/lessons'
 
 interface AssessmentFormProps {
   areaSlug: string

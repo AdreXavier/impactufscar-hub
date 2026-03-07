@@ -2,8 +2,8 @@ import { auth } from '@clerk/nextjs/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronRight } from 'lucide-react'
-import { courses } from '../../lib/courses'
-import { getAreaProgress, getCompletedLessons } from '../actions/lessons'
+import { courses } from '../../../lib/courses'
+import { getAreaProgress, getCompletedLessons } from '../../actions/lessons'
 
 export const dynamic = 'force-dynamic'
 

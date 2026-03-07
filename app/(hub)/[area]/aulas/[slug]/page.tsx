@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
-import { courses } from '../../../../lib/courses'
-import { getCompletedLessons } from '../../../actions/lessons'
+import { courses } from '../../../../../lib/courses'
+import { getCompletedLessons } from '../../../../actions/lessons'
 import LessonCompleteButton from './LessonCompleteButton'
 import LessonTabs from './LessonTabs'
 

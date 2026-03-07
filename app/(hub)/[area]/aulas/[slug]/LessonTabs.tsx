@@ -2,8 +2,8 @@
 
 import { useState, useTransition } from 'react'
 import { PlayCircle, BookOpen, FileText, Send, Lightbulb } from 'lucide-react'
-import { submitAssessment } from '../../../actions/lessons'
-import type { LessonReading } from '../../../../lib/courses'
+import { submitAssessment } from '../../../../actions/lessons'
+import type { LessonReading } from '../../../../../lib/courses'
 
 type Tab = 'conteudo' | 'leituras' | 'avaliacao'
 

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Maria Silva",
+    "role": "Presidente",
+    "photo": null,
+    "bio": "Estudante de Ciência da Computação, apaixonada por AI Safety."
+  },
+  {
+    "name": "João Santos",
+    "role": "Vice-Presidente — Finanças Quantitativas",
+    "photo": null,
+    "bio": "Estudante de Estatística com foco em modelagem financeira."
+  },
+  {
+    "name": "Ana Oliveira",
+    "role": "Diretora de Pesquisa",
+    "photo": null,
+    "bio": "Mestranda em Computação com pesquisa em alinhamento de IA."
+  }
+]

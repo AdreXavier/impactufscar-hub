@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ai-safety-fundamentals",
+    "title": "AI Safety Fundamentals",
+    "description": "Programa introdutório sobre os fundamentos de segurança em inteligência artificial, cobrindo alinhamento, interpretabilidade e governança de IA.",
+    "schedule": "Março - Junho 2026 | Terças e Quintas, 19h-21h",
+    "applicationLink": "#",
+    "status": "open"
+  },
+  {
+    "id": "quant-finance-track",
+    "title": "Trilha de Finanças Quantitativas",
+    "description": "Programa prático de finanças quantitativas com foco em modelagem estatística, análise de séries temporais e estratégias quantitativas.",
+    "schedule": "Abril - Julho 2026 | Segundas e Quartas, 18h-20h",
+    "applicationLink": "#",
+    "status": "upcoming"
+  }
+]

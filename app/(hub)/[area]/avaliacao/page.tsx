@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { courses } from '../../../lib/courses'
+import { courses } from '../../../../lib/courses'
 import AssessmentForm from './AssessmentForm'
 
 export const dynamic = 'force-dynamic'

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
-import { courses } from '../../../../lib/courses'
+import { courses } from '../../../../../lib/courses'
 
 export const dynamic = 'force-dynamic'
 
