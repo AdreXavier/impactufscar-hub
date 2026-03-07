@@ -16,6 +16,28 @@
   --accent: #c4395a;
 }
 
+/* Light mode variables */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-page: #ffffff;
+    --bg-card: #f9f5f6;
+    --bg-card-hover: #f0e8eb;
+    --border: #e8d5da;
+    --text-primary: #1a0a0f;
+    --text-secondary: #6b3347;
+  }
+}
+
+/* Support for explicit dark class */
+.dark {
+  --bg-page: #0f0f1a;
+  --bg-card: #1a0009;
+  --bg-card-hover: #2a0d18;
+  --border: #3a0016;
+  --text-primary: #ffffff;
+  --text-secondary: #d4a0b0;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -38,3 +60,4 @@ a {
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: #3a0016; border-radius: 10px; }
+

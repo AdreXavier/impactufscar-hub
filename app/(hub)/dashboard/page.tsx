@@ -11,10 +11,10 @@ import {
   Search,
   Bell,
 } from 'lucide-react'
-import { courses } from '../lib/courses'
-import { getAreaProgress, getAllProgress } from './actions/lessons'
-import CourseCard from '../components/ui/CourseCard'
-import MetricCard from '../components/ui/MetricCard'
+import { courses } from '../../../lib/courses'
+import { getAreaProgress, getAllProgress } from '../../actions/lessons'
+import CourseCard from '../../../components/ui/CourseCard'
+import MetricCard from '../../../components/ui/MetricCard'
 
 export const dynamic = 'force-dynamic'
 

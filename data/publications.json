@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "title": "Alinhamento de IA: Uma Revisão dos Métodos Atuais",
+    "authors": ["Maria Silva", "João Santos"],
+    "abstract": "Este artigo revisa os métodos atuais de alinhamento de inteligência artificial, abordando técnicas como RLHF, Constitutional AI e interpretabilidade mecanicista. Discutimos os desafios em aberto e as direções futuras para garantir que sistemas de IA atuem de acordo com valores humanos.",
+    "tags": ["AI Safety", "Alinhamento"],
+    "link": "https://arxiv.org/example1",
+    "date": "2025-11-15"
+  },
+  {
+    "id": "2",
+    "title": "Modelos Quantitativos para Mercados Emergentes",
+    "authors": ["Ana Oliveira", "Pedro Costa"],
+    "abstract": "Propomos um novo framework de modelagem quantitativa para mercados emergentes, combinando séries temporais com aprendizado de máquina para previsão de ativos. Os resultados mostram melhora significativa em relação a benchmarks tradicionais no contexto do mercado brasileiro.",
+    "tags": ["Quant Finance", "Mercados Emergentes"],
+    "link": "https://arxiv.org/example2",
+    "date": "2025-09-20"
+  }
+]

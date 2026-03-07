@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
-import { courses } from '../../../../lib/courses'
-import { getCompletedLessons } from '../../../actions/lessons'
+import { courses } from '../../../../../lib/courses'
+import { getCompletedLessons } from '../../../../actions/lessons'
 import LessonCompleteButton from './LessonCompleteButton'
 import LessonTabs from './LessonTabs'
 
@@ -35,7 +35,7 @@ export default async function LessonPage({
   return (
     <div className="max-w-5xl mx-auto space-y-6 pb-24 p-6 lg:p-10">
       <nav className="flex items-center gap-2 text-xs font-medium text-[#d4a0b0]">
-        <Link href="/" className="hover:text-white">Home</Link>
+        <Link href="/dashboard" className="hover:text-white">Home</Link>
         <ChevronRight size={12} />
         <Link href={`/${area}`} className="text-[#c4395a] hover:text-white">{course.title}</Link>
         <ChevronRight size={12} />
