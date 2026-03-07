@@ -1,5 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
-import { NextRequest, NextResponse } from 'next/server'
+import { type NextFetchEvent, NextRequest, NextResponse } from 'next/server'
 
 const isPublicFacingRoute = createRouteMatcher([
   '/',
@@ -17,12 +17,12 @@ const hubMiddleware = clerkMiddleware(async (auth, request) => {
   }
 })
 
-export default function middleware(request: NextRequest) {
+export default function middleware(request: NextRequest, event: NextFetchEvent) {
   // Skip Clerk entirely for public-facing pages (no Clerk env vars needed)
   if (isPublicFacingRoute(request)) {
     return NextResponse.next()
   }
-  return hubMiddleware(request)
+  return hubMiddleware(request, event)
 }
 
 export const config = {

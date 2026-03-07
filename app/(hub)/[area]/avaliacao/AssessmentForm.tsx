@@ -57,7 +57,7 @@ export default function AssessmentForm({ areaSlug, lessonSlug, courseTitle, ques
   return (
     <main className="mx-auto max-w-5xl p-6 lg:p-10 space-y-6">
       <nav className="flex items-center gap-2 text-xs font-medium text-[#d4a0b0]">
-        <Link href="/" className="hover:text-white">Home</Link>
+        <Link href="/dashboard" className="hover:text-white">Home</Link>
         <ChevronRight size={12} />
         <Link href={`/${areaSlug}`} className="text-[#c4395a] hover:text-white">{courseTitle}</Link>
         <ChevronRight size={12} />
