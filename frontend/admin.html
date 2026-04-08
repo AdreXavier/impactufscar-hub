@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin – Impact Hub UFSCar</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <!-- ── LOGIN SCREEN ───────────────────────────────────────────── -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <img src="/logo.png" alt="Impact Hub UFSCar" class="logo" />
+        <h1>Impact Hub UFSCar</h1>
+        <p>Painel Administrativo</p>
+      </div>
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="loginEmail">E-mail</label>
+          <input
+            type="email"
+            id="loginEmail"
+            name="email"
+            class="form-input"
+            placeholder="admin@impactufscar.com"
+            required
+            autocomplete="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input
+            type="password"
+            id="loginPassword"
+            name="password"
+            class="form-input"
+            placeholder="••••••••"
+            required
+            autocomplete="current-password"
+          />
+        </div>
+        <div id="loginError" class="form-error" role="alert"></div>
+        <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+          Entrar
+        </button>
+      </form>
+      <p class="login-back"><a href="/">← Voltar ao site</a></p>
+    </div>
+  </div>
+
+  <!-- ── ADMIN PANEL ────────────────────────────────────────────── -->
+  <div id="adminPanel" class="hidden">
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="logo-area">
+          <img src="/logo.png" alt="Impact Hub UFSCar" class="logo" />
+          <span class="site-title">Impact Hub <span class="badge-admin">Admin</span></span>
+        </div>
+        <nav class="header-nav">
+          <a href="/" class="nav-link">Ver Site</a>
+          <button id="logoutBtn" class="nav-link btn-logout">Sair</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main-content">
+      <div class="admin-toolbar">
+        <h2>Gerenciar Recursos</h2>
+        <button id="newResourceBtn" class="btn btn-primary">+ Novo Recurso</button>
+      </div>
+
+      <div id="adminStatusMessage" class="status-message" aria-live="polite"></div>
+
+      <div class="admin-resources" id="adminResourcesList">
+        <div class="loading-state"><span class="spinner"></span><span>Carregando...</span></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ── RESOURCE MODAL ─────────────────────────────────────────── -->
+  <div id="resourceModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Novo Recurso</h3>
+        <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+      </div>
+      <form id="resourceForm" novalidate>
+        <input type="hidden" id="resourceId" />
+        <div class="form-group">
+          <label for="resourceTitle">Título <span class="required">*</span></label>
+          <input type="text" id="resourceTitle" class="form-input" maxlength="200" required />
+        </div>
+        <div class="form-group">
+          <label for="resourceCategory">Categoria</label>
+          <select id="resourceCategory" class="form-input">
+            <option value="Geral">Geral</option>
+            <option value="Trainee">Trainee</option>
+            <option value="Acadêmico">Acadêmico</option>
+            <option value="Pesquisa de Mercado">Pesquisa de Mercado</option>
+            <option value="Métricas">Métricas</option>
+            <option value="Segurança IA">Segurança IA</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="resourceDescription">Descrição</label>
+          <textarea id="resourceDescription" class="form-input" rows="3" maxlength="1000"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="resourceLink">Link (opcional)</label>
+          <input type="url" id="resourceLink" class="form-input" placeholder="https://..." maxlength="500" />
+        </div>
+        <div id="modalError" class="form-error" role="alert"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="modalCancelBtn">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="modalSaveBtn">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── CONFIRM DELETE MODAL ────────────────────────────────────── -->
+  <div id="confirmModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-card modal-small">
+      <div class="modal-header">
+        <h3>Confirmar exclusão</h3>
+      </div>
+      <p id="confirmMessage">Deseja realmente excluir este recurso?</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="confirmCancelBtn">Cancelar</button>
+        <button class="btn btn-danger" id="confirmOkBtn">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
