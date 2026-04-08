@@ -1,3 +1,21 @@
-.next
-node_modules
-tsconfig.tsbuildinfo
+# Dependencies
+node_modules/
+
+# Database files
+backend/data/
+
+# Environment files with secrets (only .env.example is committed)
+backend/.env
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
