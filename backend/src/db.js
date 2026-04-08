@@ -5,14 +5,24 @@ const path = require('path');
 
 const DB_PATH = process.env.DB_PATH || path.join(__dirname, '..', 'data', 'hub.db');
 
+// Resolve and validate the DB path to prevent path traversal outside the project
+const resolvedDbPath = path.resolve(DB_PATH);
+const projectRoot = path.resolve(__dirname, '..', '..');
+if (!resolvedDbPath.startsWith(projectRoot + path.sep) && resolvedDbPath !== projectRoot) {
+  throw new Error(
+    `DB_PATH "${resolvedDbPath}" is outside the project directory. ` +
+    'Set DB_PATH to a path within the project directory.'
+  );
+}
+
 // Ensure the data directory exists
 const fs = require('fs');
-const dataDir = path.dirname(DB_PATH);
+const dataDir = path.dirname(resolvedDbPath);
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
-const db = new Database(DB_PATH);
+const db = new Database(resolvedDbPath);
 
 // Enable WAL mode for better concurrency
 db.pragma('journal_mode = WAL');

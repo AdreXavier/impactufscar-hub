@@ -34,16 +34,16 @@ const loginLimiter = rateLimit({
   message: { error: 'Muitas tentativas de login. Tente novamente em 15 minutos.' },
 });
 
-// General API limit
+// General API + static file rate limit
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 200,
+  max: 500,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: 'Muitas requisições. Tente novamente em alguns minutos.' },
 });
 
-app.use('/api/', apiLimiter);
+app.use(apiLimiter);
 app.use('/api/auth/login', loginLimiter);
 
 // Serve the frontend static files

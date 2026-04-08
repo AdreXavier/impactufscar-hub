@@ -108,6 +108,8 @@ function loadStoredToken() {
   return !!token;
 }
 
+// NOTE: Client-side token expiry check is for UX only (avoids showing admin panel
+// for an expired token). The backend always validates the token on every request.
 function isTokenExpired(t) {
   try {
     const payload = JSON.parse(atob(t.split('.')[1]));
@@ -213,8 +215,8 @@ function renderAdminList(resources) {
           <p>${escapeHtml(r.category)}${r.description ? ' · ' + escapeHtml(r.description) : ''}</p>
         </div>
         <div class="admin-resource-actions">
-          <button class="btn btn-icon-edit" onclick="openEditModal(${r.id})">✏️ Editar</button>
-          <button class="btn btn-icon-delete" onclick="openDeleteConfirm(${r.id})">🗑 Excluir</button>
+          <button class="btn btn-icon-edit" data-action="edit" data-id="${r.id}">✏️ Editar</button>
+          <button class="btn btn-icon-delete" data-action="delete" data-id="${r.id}">🗑 Excluir</button>
         </div>
       </div>`
     )
@@ -257,9 +259,14 @@ async function openEditModal(id) {
   }
 }
 
-// Expose to inline onclick handlers
-window.openEditModal = openEditModal;
-window.openDeleteConfirm = openDeleteConfirm;
+// ── Event delegation for admin resource list ──────────────────
+adminResourcesList.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  const id = parseInt(btn.dataset.id, 10);
+  if (btn.dataset.action === 'edit') openEditModal(id);
+  if (btn.dataset.action === 'delete') openDeleteConfirm(id);
+});
 
 function closeModal() {
   resourceModal.classList.add('hidden');

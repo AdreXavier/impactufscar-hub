@@ -35,8 +35,16 @@ function validateResource(body) {
   if (linkVal.length > 500) {
     return { valid: false, error: 'O link deve ter no máximo 500 caracteres.' };
   }
-  if (linkVal && !/^https?:\/\/.+/.test(linkVal)) {
-    return { valid: false, error: 'O link deve começar com http:// ou https://.' };
+  if (linkVal) {
+    let parsed;
+    try {
+      parsed = new URL(linkVal);
+    } catch {
+      return { valid: false, error: 'O link deve ser uma URL válida.' };
+    }
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+      return { valid: false, error: 'O link deve começar com http:// ou https://.' };
+    }
   }
 
   return {
